@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -29,33 +30,33 @@ public class DishPhotoDAOHibernate implements DishPhotoDAO {
 		return bean;
 	}
 	
-	private final String SELECT_BY_MCID = "from DishPhotoBean where mc_id = ?";
+	private final String SELECT_BY_MCID = "from DishPhotoBean where mc_id=:mc_id";
 	@Override
 	public List<DishPhotoBean> selectByMcid(Integer mc_id) {
 		List<DishPhotoBean> list = new LinkedList<DishPhotoBean>();
 		Query query = this.getSession().createQuery(SELECT_BY_MCID);
-		query.setParameter(0, mc_id);
+		query.setParameter("mc_id", mc_id);
 		list = query.getResultList();
 		return list;
 	}
 
-	private final String SELECT_BY_DID = "from DishPhotoBean where d_id = ?";
+	private final String SELECT_BY_DID = "from DishPhotoBean where d_id=:d_id";
 	@Override
 	public List<DishPhotoBean> selectByDid(Integer d_id) {
 		List<DishPhotoBean> list = new LinkedList<DishPhotoBean>();
 		Query query = this.getSession().createQuery(SELECT_BY_DID);
-		query.setParameter(0, d_id);
+		query.setParameter("d_id", d_id);
 		list = query.getResultList();
 		return list;
 	}
 
-	private final String SELECT_BY_MCID_AND_DID = "from DishPhotoBean where mc_id = ? and d_id = ?";
+	private final String SELECT_BY_MCID_AND_DID = "from DishPhotoBean where mc_id=:mc_id and d_id=:d_id";
 	@Override
 	public List<DishPhotoBean> selectByMcidAndDid(Integer mc_id, Integer d_id) {
 		List<DishPhotoBean> list = new LinkedList<DishPhotoBean>();
 		Query query = this.getSession().createQuery(SELECT_BY_MCID_AND_DID);
-		query.setParameter(0, mc_id);
-		query.setParameter(1, d_id);
+		query.setParameter("mc_id", mc_id);
+		query.setParameter("d_id", d_id);
 		list = query.getResultList();
 		return list;
 	}

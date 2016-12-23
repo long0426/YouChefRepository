@@ -24,14 +24,14 @@ public class CalendarDAOHibernate implements CalendarDAO {
 		return (int) this.getSession().save(bean);
 	}
 
-	private final String SELECT_MCHEF = "from CalendarBean where mc_id=? and theMonth=?";
+	private final String SELECT_MCHEF = "from CalendarBean where mc_id=:mc_id and theMonth=:date";
 
 	@Override
 	public CalendarBean selectMchef(int mc_id, String date) {
 		Query query = this.getSession().createQuery(SELECT_MCHEF);
 		System.out.println("mc_id = " + mc_id);
-		query.setParameter(0, mc_id);
-		query.setParameter(1, date);
+		query.setParameter("mc_id", mc_id);
+		query.setParameter("date", date);
 		System.out.println(query.getResultList().size());
 		if (0 == query.getResultList().size())
 			return null;
@@ -40,14 +40,14 @@ public class CalendarDAOHibernate implements CalendarDAO {
 		return (CalendarBean) query.getResultList().get(0);
 	}
 
-	private final String SELECT_CHEF = "from CalendarBean where c_id=? and theMonth=?";
+	private final String SELECT_CHEF = "from CalendarBean where c_id=:c_id and theMonth=:date";
 
 	@Override
 	public CalendarBean selectChef(int c_id, String date) {
 		Query query = this.getSession().createQuery(SELECT_CHEF);
 		System.out.println("c_id = " + c_id);
-		query.setParameter(0, c_id);
-		query.setParameter(1, date);
+		query.setParameter("c_id", c_id);
+		query.setParameter("date", date);
 		System.out.println(query.getResultList().size());
 		if (0 == query.getResultList().size())
 			return null;

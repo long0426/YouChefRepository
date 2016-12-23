@@ -22,6 +22,19 @@
 		class="org.springframework.orm.hibernate5.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
+	
+	<!-- 威毅 -->
+	<bean id="sdfYM" class="java.text.SimpleDateFormat">
+		<constructor-arg value="yyyy-MM"></constructor-arg>
+	</bean>
+
+	<bean id="sdfD" class="java.text.SimpleDateFormat">
+		<constructor-arg value="dd"></constructor-arg>
+	</bean>
+
+	<bean id="sdfM" class="java.text.SimpleDateFormat">
+		<constructor-arg value="MM"></constructor-arg>
+	</bean>
 	<tx:annotation-driven transaction-manager="transactionManager"/>
 	
 </beans>

@@ -16,14 +16,11 @@ public class CalendarBean implements java.io.Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	
 	private Integer cal_id;
-	@OneToOne
-	@JoinColumn(name = "c_id")
+	
 	private ChefBean chefBean;
-	@OneToOne
-	@JoinColumn(name = "mc_id")
+	
 	private MchefBean mchefBean;
 	private Integer date1;
 	private Integer date2;
@@ -61,7 +58,7 @@ public class CalendarBean implements java.io.Serializable {
 	
 	@Override
 	public String toString() {
-		return "CalendarBean[cal_id = " + cal_id + ", c_id = " + chefBean + ", mc_id = " + mchefBean
+		return "CalendarBean[cal_id = " + cal_id + ",  mc_id = " + mchefBean
 				+ ", date1 = " + date1
 				+ ", date2 = " + date2
 				+ ", date3 = " + date3
@@ -97,22 +94,9 @@ public class CalendarBean implements java.io.Serializable {
 				+ ", maxNum = " + maxNum
 				+"]";
 	}
-	public ChefBean getChefBean() {
-		return chefBean;
-	}
-
-	public void setChefBean(ChefBean chefBean) {
-		this.chefBean = chefBean;
-	}
-
-	public MchefBean getMchefBean() {
-		return mchefBean;
-	}
-
-	public void setMchefBean(MchefBean mchefBean) {
-		this.mchefBean = mchefBean;
-	}
-
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Integer getCal_id() {
 		return cal_id;
 	}
@@ -317,7 +301,24 @@ public class CalendarBean implements java.io.Serializable {
 	public void setMaxNum(Integer maxNum) {
 		this.maxNum = maxNum;
 	}
-	
+	@OneToOne
+	@JoinColumn(name = "c_id")
+	public ChefBean getChefBean() {
+		return chefBean;
+	}
+
+	public void setChefBean(ChefBean chefBean) {
+		this.chefBean = chefBean;
+	}
+	@OneToOne
+	@JoinColumn(name = "mc_id")
+	public MchefBean getMchefBean() {
+		return mchefBean;
+	}
+
+	public void setMchefBean(MchefBean mchefBean) {
+		this.mchefBean = mchefBean;
+	}
 	
 	
 }

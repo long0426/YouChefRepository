@@ -16,5 +16,13 @@
 		<mapping class="model.TypeBean" />
 		<mapping class="model.DishPhotoBean" />
 		<mapping class="model.DishesBean" />
+		<mapping class="model.CsBean" />
+		<mapping class="model.InboxBean" />
+		<mapping class="model.OrdersBean" />
+		<mapping class="model.OrderDishesBean" />
+		<mapping class="model.OrderDetailBean" />
+		<mapping class="model.EssayBean" />
+		<mapping class="model.DiscussBean" />
+		<mapping class="model.ReviewBean" />
 	</session-factory>
 </hibernate-configuration>

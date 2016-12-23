@@ -3,12 +3,15 @@ package model;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
 @Entity
@@ -16,20 +19,18 @@ import javax.persistence.Table;
 public class TypeBean implements java.io.Serializable {
 	private static final long serialVersionUID = 1L;
 	
-	private int t_id;
+	private Integer t_id;
 	private String t_name;
-	private Set<ChefBean> chfs = new HashSet<ChefBean>();
+	private Set<ChefBean> chefBean = new HashSet<ChefBean>();
+	private Set<DishesBean> dishesBean = new HashSet<DishesBean>();
 
-	@Override
-	public String toString() {
-		return "ChefBean [t_id=" + t_id + ", t_name=" + t_name + "]";
-	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public int getT_id() {
+	public Integer getT_id() {
 		return t_id;
 	}
-	public void setT_id(int t_id) {
+	public void setT_id(Integer t_id) {
 		this.t_id = t_id;
 	}
 	public String getT_name() {
@@ -39,13 +40,29 @@ public class TypeBean implements java.io.Serializable {
 		this.t_name = t_name;
 	}	
 	
-	@OneToMany
-	@JoinColumn(name = "c_id")
-	public Set<ChefBean> getChfs(){
-		return chfs;
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER, mappedBy="typeBean")
+	@OrderBy("c_id ASC")
+	public Set<ChefBean> getChefBean(){
+		return chefBean;
 	}
-	public void  setChfs(Set<ChefBean> chfs){
-		this.chfs=chfs;
+	public void  setChefBean(Set<ChefBean> chefBean){
+		this.chefBean = chefBean;
 	}
+	
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER, mappedBy="typeBean")
+	@OrderBy("d_id ASC")
+	public Set<DishesBean> getDishesBean(){
+		return dishesBean;
+	}
+	public void  setDishesBean(Set<DishesBean> dishesBean){
+		this.dishesBean = dishesBean;
+	}
+	@Override
+	public String toString() {
+		return "TypeBean [t_id=" + t_id + ", t_name=" + t_name 
+				;
+	}
+	
+	
 	
 }

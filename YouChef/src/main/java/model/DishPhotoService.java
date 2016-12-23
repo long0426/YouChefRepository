@@ -16,8 +16,14 @@ import org.springframework.stereotype.Service;
 
 @Service(value = "dishPhotoService")
 public class DishPhotoService {
-
-	public static void main(String[] args) {
+	@Autowired
+	DishesService dishesService;
+	@Autowired
+	MchefService mchefService;
+	@Autowired
+	DishPhotoDAO dishPhotoDao;
+	
+	public static void main(String[] args) throws IOException {
 		ApplicationContext context = new ClassPathXmlApplicationContext("beans.config.xml");
 		SessionFactory sessionFactory = (SessionFactory) context.getBean("sessionFactory");
 		try {
@@ -25,25 +31,10 @@ public class DishPhotoService {
 			DishPhotoService service = (DishPhotoService) context.getBean("dishPhotoService");
 			
 			//Test for upload
-//			DishesBean dishesBean = new DishesBean();
-//			dishesBean.setD_briefing("sdfsdfsdf");
-//			dishesBean.setD_id(5002);
-////			MemberBean mb = new MemberBean();
-////			mb.setM_id(1004);
-////			dishesBean.setMemberBean(mb);
-//			dishesBean.setPrice(200);
-//			dishesBean.setD_name("bbb");
-//			dishesBean.setMenu("asdasdfsdfsdfsd");
-//			TypeBean tb = new TypeBean();
-//			tb.setT_id(4001);
-//			dishesBean.setT_id(tb);
-//			dishesBean.setD_status("0");
+//			DishesBean dishesBean = service.dishesService.select(5001);
 //			DishPhotoBean dpb = new DishPhotoBean();
-//			MchefBean mcb = new MchefBean();
-//			mcb.setMc_id(1005);
-//			System.out.println(service.mchefDao.select(mcb));
-//			dpb.setMchefBean(service.mchefDao.select(mcb));
-//			File file = new File("C:/Users/long0/Pictures/Saved Pictures/hibernate.png");
+////			dpb.setMchefBean(service.mchefService.select(1002));
+//			File file = new File("C:/Users/long0/Downloads/菜單/東南亞/涼拌青木瓜.jpg");
 //			FileInputStream fis = new FileInputStream(file);
 //			byte[] ba = new byte[fis.available()];
 //			fis.read(ba);
@@ -52,13 +43,13 @@ public class DishPhotoService {
 //			service.upload(dpb);
 			
 			//Test for selectByMcid
-//			service.selectByMcid(1004);
+//			service.selectByMcid(1002);
 			
 			//Test for selectByDid
 //			service.selectByDid(5001);
 			
 			//Test for selectByMcidAndDid
-			service.selectByMcidAndDid(1005, 5002);
+//			service.selectByMcidAndDid(1002, 5002);
 			
 			sessionFactory.getCurrentSession().getTransaction().commit();
 //		} catch (FileNotFoundException e) {
@@ -73,10 +64,7 @@ public class DishPhotoService {
 		}
 	}
 	
-	@Autowired
-	DishPhotoDAO dishPhotoDao;
-	@Autowired
-	MchefDAO mchefDao;
+	
 	
 	public DishPhotoBean upload(DishPhotoBean bean){
 		return dishPhotoDao.insert(bean);

@@ -1,41 +1,42 @@
 package model;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="dishes")
 public class DishesBean implements java.io.Serializable {
 	private static final long serialVersionUID = 1L;
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer d_id;
-	@OneToOne
-	@JoinColumn(name = "m_id")
-	private MemberBean memberBean;;
-	private Double price; 
+	
+	private int d_id;
+	private MchefBean mchefBean;
+	private double price; 
 	private	String d_name;
 	private String d_briefing;
 	private	String menu;
-	@ManyToOne
-	@JoinColumn(name = "t_id")
 	private TypeBean typeBean;
 	private String d_status;
-	
+	private Set<OrderDishesBean> orderDishes = new HashSet<OrderDishesBean>();
 	@Override
 	public String toString() {
-		return "DishesBean [d_id=" + d_id + ", memberBean=" + memberBean + ", price=" + price + ", d_name=" + d_name
+		return "DishesBean [d_id=" + d_id + ", mchefBean=" + mchefBean + ", price=" + price + ", d_name=" + d_name
 				+ ", d_briefing=" + d_briefing + ", menu=" + menu + ", typeBean=" + typeBean + ", d_status=" + d_status
 				+ "]";
 	}
-//	@Id
-//	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public int getD_id() {
 		return d_id;
 	}
@@ -73,24 +74,30 @@ public class DishesBean implements java.io.Serializable {
 		this.d_status = d_status;
 	}
 	
-//	@OneToOne
-//	@JoinColumn(name = "m_id")
-	public MemberBean getMemberBean() {
-		return memberBean;
+	@ManyToOne
+	@JoinColumn(name = "mc_id")
+	public MchefBean getMchefBean() {
+		return mchefBean;
 	}
-
-	public void setMemberBean(MemberBean memberBean) {
-		this.memberBean = memberBean;
+	public void setMchefBean(MchefBean mchefBean) {
+		this.mchefBean = mchefBean;
 	}
 	
-//	@ManyToOne
-//	@JoinColumn(name = "t_id")
-	public TypeBean getT_id() {
+	@ManyToOne
+	@JoinColumn(name = "t_id")
+	public TypeBean getTypeBean() {
 		return typeBean;
 	}
-
-	public void setT_id(TypeBean t_id) {
-		this.typeBean = t_id;
+	public void setTypeBean(TypeBean typeBean) {
+		this.typeBean = typeBean;
 	}
 	
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER, mappedBy="dishesBean")
+	@OrderBy("ods_id ASC")
+	public Set<OrderDishesBean> getOrderDishes() {
+		return orderDishes;
+	}
+	public void setOrderDishes(Set<OrderDishesBean> orderDishes) {
+		this.orderDishes = orderDishes;
+	}
 }

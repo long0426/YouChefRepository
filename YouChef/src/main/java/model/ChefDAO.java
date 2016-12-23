@@ -11,10 +11,12 @@ public interface ChefDAO {
 	
 	ChefBean insert(ChefBean bean);
 	
-	ChefBean update(int c_id, String fisrtName, String lastName,  String sex, String phone, 
-            String address, String c_status,String background,byte[] photo,Integer years);
+	ChefBean update(ChefBean bean);
 	
-	boolean delete(int c_id);
+
+	
+	
+
 }
 
 
