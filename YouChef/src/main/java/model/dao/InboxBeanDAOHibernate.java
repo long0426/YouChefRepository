@@ -24,34 +24,35 @@ public class InboxBeanDAOHibernate implements InboxDAO {
 		return sessionFactory.getCurrentSession();
 	}
 
-	@Override
-	public List<InboxBean> showInbox(MemberBean memberBean) {
-		List<InboxBean> result = null;
-		Query query = this.getSession().createQuery("from InboxBean where receiver= :receiver and i_status= '0' or i_status= '1'");
-		query.setParameter("receiver", memberBean);
-		result = query.getResultList();
-		return result;
-	}
+@Override
+public List<InboxBean> showInbox(MemberBean memberBean) {
+	List<InboxBean> result = null;
+	Query query = this.getSession().createQuery("from InboxBean where receiver= :receiver and i_status= '0' or i_status= '1'");
+	query.setParameter("receiver", memberBean);
+	result = query.getResultList();
+	return result;
+}
 
-	@Override
-	public List<InboxBean> showOutbox(MemberBean memberBean) {
-		List<InboxBean> result = null;
-		Query query = this.getSession().createQuery("from InboxBean where sender= :sender");
-		query.setParameter("sender", memberBean);
-		result = query.getResultList();
-		return result;
-	}
-	
-	
+@Override
+public List<InboxBean> showOutbox(MemberBean memberBean) {
+	List<InboxBean> result = null;
+	Query query = this.getSession().createQuery("from InboxBean where sender= :sender");
+	query.setParameter("sender", memberBean);
+	result = query.getResultList();
+	return result;
+}
 
-	@Override
-	public List<InboxBean> showUnread(MemberBean memberBean) {
-		List<InboxBean> result = null;
-		Query query = this.getSession().createQuery("from InboxBean where receiver= :receiver and i_status= '0'");
-		query.setParameter("receiver", memberBean);
-		result = query.getResultList();
-		return result;
-	}
+
+
+@Override
+public List<InboxBean> showUnread(MemberBean memberBean) {
+	List<InboxBean> result = null;
+	Query query = this.getSession().createQuery("from InboxBean where receiver= :receiver and i_status= '0'");
+	query.setParameter("receiver", memberBean);
+	result = query.getResultList();
+	return result;
+}
+
 	@Override
 	public InboxBean insert(InboxBean bean) {
 		if(bean!=null){

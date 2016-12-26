@@ -19,7 +19,8 @@ import model.misc.GlobalService;
 @Transactional
 public class MemberBeanDAOHibernate implements MemberDAO {
 	@Autowired
-	private SessionFactory sessionFactory;
+	private SessionFactory sessionFactory;	
+	public MemberBeanDAOHibernate(){}
 	public MemberBeanDAOHibernate(SessionFactory sessionFactory){
 		this.sessionFactory = sessionFactory;
 	}

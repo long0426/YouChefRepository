@@ -4,10 +4,13 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -138,7 +141,7 @@ public class MemberBean {
 		this.absent = absent;
 	}
 	
-	@OneToMany(mappedBy="sender")
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER, mappedBy="sender")
 	public Set<InboxBean> getSender() {
 		return sender;
 	}
@@ -146,7 +149,7 @@ public class MemberBean {
 	public void setSender(Set<InboxBean> sender) {
 		this.sender = sender;
 	}
-	@OneToMany(mappedBy="receiver")
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER, mappedBy="receiver")
 	public Set<InboxBean> getReceiver() {
 		return receiver;
 	}
@@ -155,8 +158,9 @@ public class MemberBean {
 		this.receiver = receiver;
 	}
 	
-	
-	@OneToMany(mappedBy="memberBean")
+//	@OneToMany
+//	@JoinColumn(name="m_id")
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER, mappedBy="memberBean")
 	public Set<CsBean> getCsBean() {
 		return csBean;
 	}

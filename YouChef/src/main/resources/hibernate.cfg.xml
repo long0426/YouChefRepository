@@ -3,12 +3,26 @@
 		"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
 		"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
-    <session-factory>
-        <property name="hibernate.dialect">org.hibernate.dialect.SQLServerDialect</property>
-        <property name="hibernate.show_sql">true</property>
-<!--         <property name="hibernate.current_session_context_class">thread</property> -->
-        
-<!-- 		<mapping class="" /> -->
-<!-- 		<mapping class="" /> -->
-    </session-factory>
+	<session-factory>
+		<property name="hibernate.dialect">org.hibernate.dialect.SQLServerDialect</property>
+		<property name="hibernate.show_sql">true</property>
+		<!-- <property name="hibernate.current_session_context_class">thread</property> -->
+
+		<mapping class="model.MemberBean" />
+		<mapping class="model.MchefBean" />
+		<mapping class="model.VenueBean" />
+		<mapping class="model.CalendarBean" />
+		<mapping class="model.ChefBean" />
+		<mapping class="model.TypeBean" />
+		<mapping class="model.DishPhotoBean" />
+		<mapping class="model.DishesBean" />
+		<mapping class="model.CsBean" />
+		<mapping class="model.InboxBean" />
+		<mapping class="model.OrdersBean" />
+		<mapping class="model.OrderDishesBean" />
+		<mapping class="model.OrderDetailBean" />
+		<mapping class="model.EssayBean" />
+		<mapping class="model.DiscussBean" />
+		<mapping class="model.ReviewBean" />
+	</session-factory>
 </hibernate-configuration>

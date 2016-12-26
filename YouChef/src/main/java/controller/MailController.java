@@ -39,6 +39,7 @@ public class MailController {
 		if(temp1!=null && temp1.length()!=0){
 			mail_id= Integer.parseInt(temp1);
 		}
+		
 			MemberBean receiver = (MemberBean) session.getAttribute("user");
 			inboxService.deleteMail(mail_id);
 			List<InboxBean> unReadMail= inboxService.showUnRead(receiver);
