@@ -62,9 +62,6 @@
 			<c:choose>
 				<c:when test="${empty user}">
 					<div id="navbar" class="navbar-collapse collapse">
-
-
-
 						<form class="navbar-form navbar-right"
 							action="<c:url value="/member/login.controller"/>" method="POST">
 							<div class="form-group">
@@ -75,13 +72,13 @@
 								<input type="password" placeholder="Password" name="password"
 									class="form-control">
 							</div>
-							<button type="submit" class="btn btn-success">Sign in</button>
+							<button type="submit" class="btn btn-success">登入</button>
 						</form>
 					</div>
 					<!--/.navbar-collapse -->
 				</c:when>
 				<c:otherwise>
-					<div class="col-md-3 col-md-push-9">
+					<div class="col-md-4 col-md-push-8">
 						<p class="navuser">${user.firstName}${user.lastName}</p>
 						<p class="navuser">
 						<a class="navuser" href="<c:url value="/mail/inbox.controller"/>">未讀:
@@ -90,8 +87,18 @@
 								<c:otherwise>${inbox}</c:otherwise>
 							</c:choose>
 						</a>
-						 登出</p>
+						<a class="navuser" href="<c:url value="/member/logout.jsp" />">登出</a></p>
 					</div>
+					<span>
+						<c:choose>
+							<c:when test="${empty user.photo}">
+								<img src="<c:url value="/image/unknow64.png" />" class="center-block">
+							</c:when>
+							<c:otherwise>
+								<img src="">
+							</c:otherwise>
+						</c:choose>
+					</span>
 				</c:otherwise>
 			</c:choose>
 		</div>

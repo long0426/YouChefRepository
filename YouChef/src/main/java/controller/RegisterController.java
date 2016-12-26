@@ -1,5 +1,6 @@
 package controller;
 
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
@@ -23,6 +24,7 @@ public class RegisterController {
 	private static final long serialVersionUID = 1L;
 	@Autowired
 	private MemberService memberService;
+	
 	Pattern emailPattern = Pattern.compile("^[\\w-]+(\\.[\\w-]+)*@[\\w-]+(\\.[\\w-]+)+$");
 	Pattern pwdPattern = Pattern.compile("^(?!.*[^a-zA-Z0-9!@#$%^&*])(?=.*\\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&*]).{6,}$");
 	Pattern namePattern = Pattern.compile("^[\u4e00-\u9fff]{2,}$");

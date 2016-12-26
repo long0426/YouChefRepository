@@ -39,15 +39,23 @@ public class MailController {
 		if(temp1!=null && temp1.length()!=0){
 			mail_id= Integer.parseInt(temp1);
 		}
-		
-			MemberBean receiver = (MemberBean) session.getAttribute("user");
-			inboxService.deleteMail(mail_id);
-			List<InboxBean> unReadMail= inboxService.showUnRead(receiver);
-			List<InboxBean> emails = (List<InboxBean>) inboxService.showInbox(receiver);
-			model.addAttribute("mails", emails);
-			session.setAttribute("inbox", unReadMail.size());
-			return "email.delete";
-		
+		MemberBean receiver = (MemberBean) session.getAttribute("user");
+			if("delete".equals(action)){
+				inboxService.deleteMail(mail_id);
+				List<InboxBean> unReadMail= inboxService.showUnRead(receiver);
+				List<InboxBean> emails = (List<InboxBean>) inboxService.showInbox(receiver);
+				model.addAttribute("mails", emails);
+				session.setAttribute("inbox", unReadMail.size());
+				return "email.delete";
+			} else if("reply".equals(action)){
+				InboxBean reciveMail = inboxDao.select(mail_id);
+				model.addAttribute("receiveMail",reciveMail);
+				inboxService.readMail(reciveMail);
+				List<InboxBean> unReadMail= inboxService.showUnRead(receiver);
+				session.setAttribute("inbox", unReadMail.size());
+				return "email.reply";
+			}
+		return "";
 	}
 	
 }

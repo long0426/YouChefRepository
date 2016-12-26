@@ -45,6 +45,11 @@ public class LoginController {
 		MemberBean bean = memberService.login(email, password);
 		if(bean==null){
 			errors.put("password", "登入失敗, 請重試!");
+			try {
+				model.addAttribute("memberPic", bean.getPhoto());
+			} catch (NullPointerException e) {
+				System.out.println("無此使用者");
+			}
 			return "login.fail";
 		}else{
 		    model.addAttribute("user", bean);

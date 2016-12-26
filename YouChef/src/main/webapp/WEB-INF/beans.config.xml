@@ -35,6 +35,12 @@
 	<bean id="sdfM" class="java.text.SimpleDateFormat">
 		<constructor-arg value="MM"></constructor-arg>
 	</bean>
+	
+	<!--  書賢 -->
+	<bean id="sdfYMH" class="java.text.SimpleDateFormat">
+		<constructor-arg value="yyyy年MM月dd日 mm:ss"></constructor-arg>
+	</bean>
+	
 	<tx:annotation-driven transaction-manager="transactionManager"/>
 	
 </beans>
