@@ -2,22 +2,24 @@
 
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.time.ZonedDateTime;
 import java.util.List;
+
+
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.SharedSessionContract;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Repository;
 
+import model.CalendarDAO;
 import model.ChefBean;
 import model.ChefDAO;
 import model.MchefBean;
-import model.MchefService;
-import model.MemberBean;
-import model.MemberDAO;
 import model.OrdersBean;
 import model.OrdersDAO;
 @Repository(value="ordersDAO")
@@ -25,80 +27,69 @@ public class OrdersDAOHibernate implements OrdersDAO {
 
 	private static final String GET_ALL_STMT = "from OrdersBean order by o_id";
 
+	
 	@Autowired
 	private SessionFactory sessionFactory;
     public Session getSession(){
     	return sessionFactory.getCurrentSession();
     }
     
-    @Autowired
-    private MemberDAO memberDAO;
-    @Autowired
-    private MchefService mchefService;
-    
     public static void main (String[] args){
     	ApplicationContext context = new ClassPathXmlApplicationContext("beans.config.xml");
 		SessionFactory sessionFactory = (SessionFactory)context.getBean("sessionFactory");
 		try {
 			sessionFactory.getCurrentSession().beginTransaction();
-			OrdersDAOHibernate orders = (OrdersDAOHibernate) context.getBean("ordersDAO");
-//			List <OrdersBean> all = (List <OrdersBean>) orders.getAll();
-//			System.out.println("all= "+all);
-//			System.out.println("----------------");
-//			OrdersBean single = orders.findByPrimaryKey(12000);
-//			System.out.println("single= "+single);
-//			System.out.println("----------------");
-//			System.out.println("single's MemberBean= "+single.getMemberBean());
-//			System.out.println("----------------");
-//			System.out.println("single's MchefBean= "+ single.getMchefBean());
-//			System.out.println("----------------");
-//			System.out.println("single's ChefBean= "+ single.getChefBean());
-//			System.out.println("----------------");
+			OrdersDAO orders = (OrdersDAOHibernate) context.getBean("ordersDAO");
+			List <OrdersBean> all = (List <OrdersBean>) orders.getAll();
+			System.out.println("all= "+all);
+			System.out.println("----------------");
+			OrdersBean single = orders.findByPrimaryKey(12000);
+			System.out.println("single= "+single);
+			System.out.println("----------------");
+			System.out.println("single's MemberBean= "+single.getMemberBean());
+			System.out.println("----------------");
+			System.out.println("single's MchefBean= "+ single.getMchefBean());
+			System.out.println("----------------");
+			System.out.println("single's ChefBean= "+ single.getChefBean());
+			System.out.println("----------------");
 			
-//			ChefDAO ch = (ChefDAOHibernate) context.getBean("chefDao");
-//			ChefBean ch1 = ch.select(4011);
-////			System.out.println("ch1: " + ch1);
-////			System.out.println("----------------");
-////			
-//			OrdersBean newOne = new OrdersBean();
-////			newOne.setChefBean(ch1);
-//			newOne.setOrderDate(Date.valueOf("2016-12-31"));
-//			newOne.setMchefBean(orders.mchefService.select(1002));
-//			MemberBean mb = new MemberBeanDAOHibernate(orders.sessionFactory).select(1001);
-//			newOne.setMemberBean(mb);
-//////			newOne.setMemberBean(single.getMemberBean());
-//			newOne.setO_status("0");
-//			newOne.setPeople(2);
-//			newOne.setTotalPrice(5000f);
-//			newOne.setUpdateTime(new Timestamp(System.currentTimeMillis()));
-//			newOne.setR_message("Good");
-//			newOne.setR_stars(new Float(3.9));
-//			newOne.setSession("2");
-//			newOne.setDineDate(new Timestamp(System.currentTimeMillis()));
-//			newOne.setDinePlace("資策會");
-////			
-//			OrdersBean insert = orders.insert(newOne);
-//			System.out.println("insert= "+ insert);
-			
-//			System.out.println("----------------");
-//			OrdersBean cancel = orders.cancel("1", new Timestamp(System.currentTimeMillis()) , new Integer(12000));
-//			System.out.println("cancel= "+ cancel);
-//			System.out.println("----------------");
-//			OrdersBean complete = orders.complete("3", new Timestamp(System.currentTimeMillis()), new Integer(12000));
-//			System.out.println("complete= "+ complete);
+			ChefDAO ch = (ChefDAOHibernate) context.getBean("chefDao");
+			ChefBean ch1 = ch.select(3003);
+//			System.out.println("ch1: " + ch1);
 //			System.out.println("----------------");
 			
+			OrdersBean newOne = new OrdersBean();
+			newOne.setChefBean(ch1);
+			newOne.setOrderDate(Date.valueOf("2014-3-19"));
+			newOne.setMchefBean(single.getMchefBean());
+			newOne.setMemberBean(single.getMemberBean());
+			newOne.setO_status(single.getO_status());
+			newOne.setPeople(single.getPeople());
+			newOne.setTotalPrice(new Float(3999.9));
+			newOne.setUpdateTime(new Timestamp(System.currentTimeMillis()));
+			newOne.setR_message("Good");
+			newOne.setR_stars(new Float(3.9));
+			newOne.setSession("2");
+			newOne.setDineDate(new Timestamp(System.currentTimeMillis()));
+			newOne.setDinePlace("資策會");
 			
-//			OrdersBean updatedPlace = orders.updatePlace("台北市龍山寺捷運站出口", Date.valueOf("2015-12-13"), new Timestamp(System.currentTimeMillis()), new Integer(12001));
-//			System.out.println("updatedPlace= "+ updatedPlace);
+			OrdersBean insert = orders.insert(newOne);
+			System.out.println("insert= "+ insert);
 			
-//			CalendarDAO c = (CalendarDAOHibernate) context.getBean("calendarDao");
-//			System.out.println("c= " + c.selectMchef(1001, "12"));
+			System.out.println("----------------");
+			OrdersBean cancel = orders.cancel("1", new Timestamp(System.currentTimeMillis()) , new Integer(12000));
+			System.out.println("cancel= "+ cancel);
+			System.out.println("----------------");
+			OrdersBean complete = orders.complete("3", new Timestamp(System.currentTimeMillis()), new Integer(12000));
+			System.out.println("complete= "+ complete);
+			System.out.println("----------------");
 			
-			//findByPrimaryKey
-//			System.out.println(orders.findByPrimaryKey(12001));
 			
+			OrdersBean updatedPlace = orders.updatePlace("台北市龍山寺捷運站出口", Date.valueOf("2015-12-13"), new Timestamp(System.currentTimeMillis()), new Integer(13006));
+			System.out.println("updatedPlace= "+ updatedPlace);
 			
+			CalendarDAO c = (CalendarDAOHibernate) context.getBean("calendarDao");
+			System.out.println("c= " + c.selectMchef(1001, "12"));
 			sessionFactory.getCurrentSession().getTransaction().commit();
 		} finally {
 			sessionFactory.close();
@@ -186,6 +177,12 @@ public class OrdersDAOHibernate implements OrdersDAO {
 			completion.setUpdateTime(updateTime);	
 		}
 		return completion;
+	}
+
+	@Override
+	public List<OrdersBean> selectlistReviewMember(int c_id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
 

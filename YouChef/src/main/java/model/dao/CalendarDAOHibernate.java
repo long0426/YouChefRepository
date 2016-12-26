@@ -23,7 +23,6 @@ public class CalendarDAOHibernate implements CalendarDAO {
 	public int insert(CalendarBean bean) {
 		return (int) this.getSession().save(bean);
 	}
-
 	private final String SELECT_MCHEF = "from CalendarBean where mc_id=:mc_id and theMonth=:date";
 
 	@Override

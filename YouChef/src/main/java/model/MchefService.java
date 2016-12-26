@@ -83,6 +83,7 @@ public class MchefService {
 	
 	public MchefBean select(Integer mc_id) {
 		return mchefDao.select(mc_id);
+
 	}
 
 	public MchefBean update(MchefBean bean) {

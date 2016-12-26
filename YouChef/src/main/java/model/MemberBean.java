@@ -3,7 +3,6 @@ package model;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -177,4 +176,5 @@ public class MemberBean {
 				+ ", ac_status=" + ac_status + ", briefing=" + briefing + ", photo=" + Arrays.toString(photo)
 				+ ", absent=" + absent + "]";
 	}	
+
 }

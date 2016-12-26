@@ -20,4 +20,6 @@ public interface OrdersDAO {
 
 	List<OrdersBean> getAll();
 
+	List<OrdersBean> selectlistReviewMember(int c_id);
+
 }

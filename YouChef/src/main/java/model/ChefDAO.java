@@ -13,9 +13,7 @@ public interface ChefDAO {
 	
 	ChefBean update(ChefBean bean);
 	
-
-	
-	
+	List<ChefBean> selectChefByType(int t_id);
 
 }
 

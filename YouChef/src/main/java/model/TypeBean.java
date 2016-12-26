@@ -18,7 +18,6 @@ import javax.persistence.Table;
 @Table(name="type")
 public class TypeBean implements java.io.Serializable {
 	private static final long serialVersionUID = 1L;
-	
 	private Integer t_id;
 	private String t_name;
 	private Set<ChefBean> chefBean = new HashSet<ChefBean>();
@@ -30,7 +29,7 @@ public class TypeBean implements java.io.Serializable {
 	public Integer getT_id() {
 		return t_id;
 	}
-	public void setT_id(Integer t_id) {
+	public void setT_id(int t_id) {
 		this.t_id = t_id;
 	}
 	public String getT_name() {

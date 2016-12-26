@@ -15,4 +15,5 @@ public interface MemberDAO {
 			                       String district, String address, String briefing, byte[] photo);
 	
 	boolean update(String password, int m_id);
+
 }

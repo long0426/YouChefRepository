@@ -36,7 +36,6 @@ public class OrderDetailService {
 			((ConfigurableApplicationContext) context).close();
 		}
 	}
-	
 	public OrderDetailBean placeNewOrderDetail(OrderDetailBean bean){
 		OrderDetailBean result = null;
 		if (bean != null) {
@@ -45,11 +44,6 @@ public class OrderDetailService {
 		return result;
 		
 	}
-
-
-
-	
-	
 }
 
 	

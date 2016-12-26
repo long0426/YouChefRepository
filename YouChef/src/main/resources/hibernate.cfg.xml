@@ -7,7 +7,6 @@
 		<property name="hibernate.dialect">org.hibernate.dialect.SQLServerDialect</property>
 		<property name="hibernate.show_sql">true</property>
 		<!-- <property name="hibernate.current_session_context_class">thread</property> -->
-
 		<mapping class="model.MemberBean" />
 		<mapping class="model.MchefBean" />
 		<mapping class="model.VenueBean" />
@@ -25,4 +24,5 @@
 		<mapping class="model.DiscussBean" />
 		<mapping class="model.ReviewBean" />
 	</session-factory>
+
 </hibernate-configuration>

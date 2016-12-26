@@ -64,8 +64,6 @@ public class DishPhotoService {
 		}
 	}
 	
-	
-	
 	public DishPhotoBean upload(DishPhotoBean bean){
 		return dishPhotoDao.insert(bean);
 	}

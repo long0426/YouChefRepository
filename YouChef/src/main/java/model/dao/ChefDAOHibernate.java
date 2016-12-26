@@ -1,11 +1,15 @@
 package model.dao;
 
-
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
+
+import javax.persistence.Query;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -14,6 +18,8 @@ import org.springframework.stereotype.Repository;
 
 import model.ChefBean;
 import model.ChefDAO;
+import model.DishesBean;
+import model.TypeBean;
 
 
 
@@ -71,12 +77,14 @@ public class ChefDAOHibernate implements ChefDAO {
 				ChefDAO chefDao = (ChefDAO) context.getBean("chefDao");
 				ChefBean select = chefDao.select(4002);
 				System.out.println("select="+select);
-				//selectALL
+				//getAllALL
 //				ChefDAO chefDao = (ChefDAO) context.getBean("chefDao");
-//				List<ChefBean> selects = chefDao.select();
-//				System.out.println("selects="+selects);
+				List<ChefBean> getAll = chefDao.select();
+				System.out.println("getAll="+getAll);
 				//update
-				
+				//selectChefByType
+				List<ChefBean> chefs = chefDao.selectChefByType(3003);
+				System.out.println("selects="+chefs);
 				
 //				File pic = new File("D:/image/049.jpg");
 //				byte ba[] = null;
@@ -151,9 +159,12 @@ public class ChefDAOHibernate implements ChefDAO {
 		}
 		return null;
 	}
-
-	
-
+	@Override
+	public List<ChefBean> selectChefByType(int t_id) {
+		Query query = this.getSession().createQuery("from ChefBean where t_id=?");
+		query.setParameter(0, t_id);
+		return (List<ChefBean>) query.getResultList();
+	}
 }
 
 

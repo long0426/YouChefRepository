@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
@@ -29,6 +30,7 @@ public class DishesBean implements java.io.Serializable {
 	private TypeBean typeBean;
 	private String d_status;
 	private Set<OrderDishesBean> orderDishes = new HashSet<OrderDishesBean>();
+	private DishPhotoBean dishPhotoBean;
 	@Override
 	public String toString() {
 		return "DishesBean [d_id=" + d_id + ", mchefBean=" + mchefBean + ", price=" + price + ", d_name=" + d_name
@@ -100,4 +102,16 @@ public class DishesBean implements java.io.Serializable {
 	public void setOrderDishes(Set<OrderDishesBean> orderDishes) {
 		this.orderDishes = orderDishes;
 	}
+	
+	
+	@OneToOne
+	@JoinColumn(name = "d_id")
+	public DishPhotoBean getDishPhotoBean() {
+		return this.dishPhotoBean;
+	}
+	public void setDishPhotoBean(DishPhotoBean dishPhotoBean) {
+		this.dishPhotoBean = dishPhotoBean;
+	}
+
+
 }
