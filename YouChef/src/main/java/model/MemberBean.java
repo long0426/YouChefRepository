@@ -3,23 +3,20 @@ package model;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.OrderBy;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="member")
 public class MemberBean {
-	
+
 	private int m_id;
 	private	String lastName;
 	private	String firstName;
@@ -36,11 +33,13 @@ public class MemberBean {
 	private	String briefing;
 	private byte[] photo;
 	private Integer absent;
+	private Set<InboxBean> sender = new HashSet<InboxBean>();
+	private Set<InboxBean> receiver = new HashSet<InboxBean>();
+	private Set<CsBean> csBean = new HashSet<CsBean>();
 	
-	private Set<DishesBean> dishesBean = new HashSet<DishesBean>();
-	private Set<OrdersBean> orders = new HashSet<OrdersBean>();
-	
-	private MchefBean mchefBean;
+	public MemberBean() {
+		
+	}
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -50,7 +49,6 @@ public class MemberBean {
 	public void setM_id(int m_id) {
 		this.m_id = m_id;
 	}
-	
 	public String getLastName() {
 		return lastName;
 	}
@@ -142,39 +140,41 @@ public class MemberBean {
 		this.absent = absent;
 	}
 	
-	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER, mappedBy="memberBean")
-	@OrderBy("o_id ASC")
-	public Set<OrdersBean> getOrders() {
-		return orders;
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER, mappedBy="sender")
+	public Set<InboxBean> getSender() {
+		return sender;
 	}
-	public void setOrders(Set<OrdersBean> orders) {
-		this.orders = orders;
-	}	
+
+	public void setSender(Set<InboxBean> sender) {
+		this.sender = sender;
+	}
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER, mappedBy="receiver")
+	public Set<InboxBean> getReceiver() {
+		return receiver;
+	}
+
+	public void setReceiver(Set<InboxBean> receiver) {
+		this.receiver = receiver;
+	}
 	
-	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER, mappedBy="typeBean")
-	@OrderBy("d_id ASC")
-	public Set<DishesBean> getDishesBean(){
-		return dishesBean;
+//	@OneToMany
+//	@JoinColumn(name="m_id")
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER, mappedBy="memberBean")
+	public Set<CsBean> getCsBean() {
+		return csBean;
 	}
-	public void  setDishesBean(Set<DishesBean> dishesBean){
-		this.dishesBean = dishesBean;
+
+	public void setCsBean(Set<CsBean> csBean) {
+		this.csBean = csBean;
 	}
-	@OneToOne(cascade=CascadeType.ALL)
-    @PrimaryKeyJoinColumn
-	public MchefBean getMchefBean() {
-		return mchefBean;
-	}
-	public void setMchefBean(MchefBean mchefBean) {
-		this.mchefBean = mchefBean;
-	}
+
 	@Override
 	public String toString() {
 		return "MemberBean [m_id=" + m_id + ", lastName=" + lastName + ", firstName=" + firstName + ", nickname="
 				+ nickname + ", sex=" + sex + ", email=" + email + ", password=" + password + ", phone=" + phone
 				+ ", city=" + city + ", district=" + district + ", address=" + address + ", facebook=" + facebook
 				+ ", ac_status=" + ac_status + ", briefing=" + briefing + ", photo=" + Arrays.toString(photo)
-				+ ", absent=" + absent + ", dishesBean=" + dishesBean + ", orders=" + orders + ", mchefBean="
-				+ mchefBean ;
-	}
-	
+				+ ", absent=" + absent + "]";
+	}	
+
 }

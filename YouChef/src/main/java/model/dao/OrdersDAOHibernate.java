@@ -54,7 +54,7 @@ public class OrdersDAOHibernate implements OrdersDAO {
 			System.out.println("----------------");
 			
 			ChefDAO ch = (ChefDAOHibernate) context.getBean("chefDao");
-			ChefBean ch1 = ch.selectChefById(3003);
+			ChefBean ch1 = ch.select(3003);
 //			System.out.println("ch1: " + ch1);
 //			System.out.println("----------------");
 			

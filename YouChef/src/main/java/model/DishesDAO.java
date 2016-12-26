@@ -5,7 +5,6 @@ import java.util.List;
 public interface DishesDAO {
 	
 	DishesBean insert(DishesBean dishesBean);	
-	
 	List<DishesBean> selectAllDishes();
 	
 	DishesBean selectDishById(int d_id);
@@ -18,5 +17,5 @@ public interface DishesDAO {
 	List<DishesBean> selectDishesByMchef (int mc_id);
 	
 	List<DishesBean> selectMenuByType(int t_id);
-	
+
 }

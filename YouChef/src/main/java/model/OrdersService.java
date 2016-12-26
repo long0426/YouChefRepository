@@ -42,9 +42,7 @@ public class OrdersService {
 			try {
 				sessionFactory.getCurrentSession().beginTransaction();
 				OrdersService os = (OrdersService) context.getBean("ordersService");
-				//OrdersBean orderbean = (OrdersBean) context.getBean("orders");
-				OrdersDAO od = (OrdersDAOHibernate) context.getBean("ordersDAO");
-				OrdersBean orderbean = od.findByPrimaryKey(12004);
+				OrdersBean orderbean = os.ordersDAO.findByPrimaryKey(12004);
 				//CalendarBean c = (CalendarBean) context.getBean("calendar");
 				//System.out.println(c);
 				//System.out.println(orderbean);

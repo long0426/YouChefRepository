@@ -10,4 +10,7 @@ public interface MchefDAO {
 	List<MchefBean> selectAll();
 	
 	MchefBean update(MchefBean bean);
+	
+	MchefBean select(Integer mc_id);
+
 }

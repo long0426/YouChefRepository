@@ -17,14 +17,6 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-//撈評價~
-//selectReviewMember~
-//抓圖片~
-//抓廚師檔案~
-//抓星評呼叫松和Review的方法
-//首頁條件選擇
-//
-
 @Service(value = "chefService")
 @Transactional(transactionManager="transactionManager")
 public class ChefService {
@@ -90,27 +82,27 @@ public class ChefService {
 	}
 	
 	@Transactional(readOnly=true)
-	public List<ChefBean> getAll(ChefBean bean) {
+	public List<ChefBean> select(ChefBean bean) {
 		List<ChefBean> result = null;
 		if(bean != null && bean.getC_id() !=0){
-			ChefBean temp = chefDao.selectChefById (bean.getC_id());
+			ChefBean temp = chefDao.select (bean.getC_id());
 			if(temp !=null){
 				result = new ArrayList<ChefBean>();
 				result.add(temp);
 			}
 			}else{
-				result = chefDao.getAll();
+				result = chefDao.select();
 			}
 			return result;
 		}
 	@Transactional(readOnly=true)
-	public List<ChefBean> getAll() {
-		List<ChefBean> list = chefDao.getAll();
+	public List<ChefBean> select() {
+		List<ChefBean> list = chefDao.select();
 		return list;
 	}	
 	@Transactional(readOnly=true)
-	public ChefBean selectChefById (int c_id) {
-		return chefDao.selectChefById (c_id);
+	public ChefBean select (int c_id) {
+		return chefDao.select (c_id);
 	}
 	
 //	@Autowired

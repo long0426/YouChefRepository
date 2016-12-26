@@ -1,6 +1,5 @@
 package model.dao;
 
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -76,11 +75,11 @@ public class ChefDAOHibernate implements ChefDAO {
 				
 				//select
 				ChefDAO chefDao = (ChefDAO) context.getBean("chefDao");
-				ChefBean select = chefDao.selectChefById(4002);
+				ChefBean select = chefDao.select(4002);
 				System.out.println("select="+select);
 				//getAllALL
 //				ChefDAO chefDao = (ChefDAO) context.getBean("chefDao");
-				List<ChefBean> getAll = chefDao.getAll();
+				List<ChefBean> getAll = chefDao.select();
 				System.out.println("getAll="+getAll);
 				//update
 				//selectChefByType
@@ -128,12 +127,12 @@ public class ChefDAOHibernate implements ChefDAO {
 		
 	
     @Override
-	public ChefBean selectChefById(int c_id) {
+	public ChefBean select(int c_id) {
     	return getSession().get(ChefBean.class, c_id);
 	}
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<ChefBean> getAll() {
+	public List<ChefBean> select() {
 		Query query = this.getSession().createQuery("from ChefBean");
 		return (List<ChefBean>)query.getResultList();
 	}
@@ -166,11 +165,6 @@ public class ChefDAOHibernate implements ChefDAO {
 		query.setParameter(0, t_id);
 		return (List<ChefBean>) query.getResultList();
 	}
-
-	
-
-	
-
 }
 
 

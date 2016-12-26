@@ -5,77 +5,103 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import org.springframework.stereotype.Component;
-@Component(value="calendar")
 @Entity
-@Table(name = "Calendar")
-public class CalendarBean implements java.io.Serializable{
+@Table(name = "calendar")
+public class CalendarBean implements java.io.Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
-	 private static final long serialVersionUID = 1L;
 	
-	 private int cal_id;      
-	 private ChefBean chefBean;        
-	 private MchefBean mchefBean;      
-	 private Integer date1;
-	 private Integer date2;	     
-	 private Integer date3;	      
-	 private Integer date4;	      
-	 private Integer date5;	     
-	 private Integer date6;	      
-	 private Integer date7;	      
-	 private Integer date8;	     
-	 private Integer date9;	      
-	 private Integer date10;	    
-	 private Integer date11;    
-	 private Integer date12;	      
-	 private Integer date13;      
-	 private Integer date14;	     
-	 private Integer date15;	     
-	 private Integer date16;	    
-	 private Integer date17;	      
-	 private Integer date18;	     
-	 private Integer date19;	     
-	 private Integer date20;	     
-	 private Integer date21;	    
-	 private Integer date22;	    
-	 private Integer date23;	     
-	 private Integer date24;	    
-	 private Integer date25;	    
-	 private Integer date26;	     
-	 private Integer date27;	   
-	 private Integer date28;	     
-	 private Integer date29;	     
-	 private Integer date30;	      
-	 private Integer date31;	          
-	 private String theMonth;    
-	 private int maxNum;
-	 
+	private Integer cal_id;
+	
+	private ChefBean chefBean;
+	
+	private MchefBean mchefBean;
+	private Integer date1;
+	private Integer date2;
+	private Integer date3;
+	private Integer date4;
+	private Integer date5;
+	private Integer date6;
+	private Integer date7;
+	private Integer date8;
+	private Integer date9;
+	private Integer date10;
+	private Integer date11;
+	private Integer date12;
+	private Integer date13;
+	private Integer date14;
+	private Integer date15;
+	private Integer date16;
+	private Integer date17;
+	private Integer date18;
+	private Integer date19;
+	private Integer date20;
+	private Integer date21;
+	private Integer date22;
+	private Integer date23;
+	private Integer date24;
+	private Integer date25;
+	private Integer date26;
+	private Integer date27;
+	private Integer date28;
+	private Integer date29;
+	private Integer date30;
+	private Integer date31;
+	private String theMonth;
+	private Integer maxNum;
+	
+	@Override
+	public String toString() {
+		return "CalendarBean[cal_id = " + cal_id + ",  mc_id = " + mchefBean
+				+ ", date1 = " + date1
+				+ ", date2 = " + date2
+				+ ", date3 = " + date3
+				+ ", date4 = " + date4
+				+ ", date5 = " + date5
+				+ ", date6 = " + date6
+				+ ", date7 = " + date7
+				+ ", date8 = " + date8
+				+ ", date9 = " + date9
+				+ ", date10 = " + date10
+				+ ", date11 = " + date11
+				+ ", date12 = " + date12
+				+ ", date13 = " + date13
+				+ ", date14 = " + date14
+				+ ", date15 = " + date15
+				+ ", date16 = " + date16
+				+ ", date17 = " + date17
+				+ ", date18 = " + date18
+				+ ", date19 = " + date19
+				+ ", date20 = " + date20
+				+ ", date21 = " + date21
+				+ ", date22 = " + date22
+				+ ", date23 = " + date23
+				+ ", date24 = " + date24
+				+ ", date25 = " + date25
+				+ ", date26 = " + date26
+				+ ", date27 = " + date27
+				+ ", date28 = " + date28
+				+ ", date29 = " + date29
+				+ ", date30 = " + date30
+				+ ", date31 = " + date31
+				+ ", theMonth = " + theMonth
+				+ ", maxNum = " + maxNum
+				+"]";
+	}
+	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY) 
-	public int getCal_id() {
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	public Integer getCal_id() {
 		return cal_id;
 	}
-	public void setCal_id(int cal_id) {
+	public void setCal_id(Integer cal_id) {
 		this.cal_id = cal_id;
-	}
-	@ManyToOne
-	@JoinColumn(name = "c_id") 
-	public ChefBean getChefBean() {
-		return chefBean;
-	}
-	public void setChefBean(ChefBean chefBean) {
-		this.chefBean = chefBean;
-	}
-	@ManyToOne
-	@JoinColumn(name = "mc_id") 
-	public MchefBean getMchefBean() {
-		return mchefBean;
-	}
-	public void setMchefBean(MchefBean mchefBean) {
-		this.mchefBean = mchefBean;
 	}
 	public Integer getDate1() {
 		return date1;
@@ -263,42 +289,37 @@ public class CalendarBean implements java.io.Serializable{
 	public void setDate31(Integer date31) {
 		this.date31 = date31;
 	}
-
 	public String getTheMonth() {
 		return theMonth;
 	}
 	public void setTheMonth(String theMonth) {
 		this.theMonth = theMonth;
 	}
-	public int getMaxNum() {
+	public Integer getMaxNum() {
 		return maxNum;
 	}
-	public void setMaxNum(int maxNum) {
+	public void setMaxNum(Integer maxNum) {
 		this.maxNum = maxNum;
 	}
-	@Override
-	public String toString() {
-		return "CalendarBean [cal_id=" + cal_id + ", date1="
-				+ date1 + ", date2=" + date2 + ", date3=" + date3 + ", date4=" + date4 + ", date5=" + date5 + ", date6="
-				+ date6 + ", date7=" + date7 + ", date8=" + date8 + ", date9=" + date9 + ", date10=" + date10
-				+ ", date11=" + date11 + ", date12=" + date12 + ", date13=" + date13 + ", date14=" + date14
-				+ ", date15=" + date15 + ", date16=" + date16 + ", date17=" + date17 + ", date18=" + date18
-				+ ", date19=" + date19 + ", date20=" + date20 + ", date21=" + date21 + ", date22=" + date22
-				+ ", date23=" + date23 + ", date24=" + date24 + ", date25=" + date25 + ", date26=" + date26
-				+ ", date27=" + date27 + ", date28=" + date28 + ", date29=" + date29 + ", date30=" + date30
-				+ ", date31=" + date31 + ", theMonth=" + theMonth + ", maxNum=" + maxNum
-				;
+	@OneToOne
+	@JoinColumn(name = "c_id")
+	public ChefBean getChefBean() {
+		return chefBean;
+	}
+
+	public void setChefBean(ChefBean chefBean) {
+		this.chefBean = chefBean;
+	}
+	@OneToOne
+	@JoinColumn(name = "mc_id")
+	public MchefBean getMchefBean() {
+		return mchefBean;
+	}
+
+	public void setMchefBean(MchefBean mchefBean) {
+		this.mchefBean = mchefBean;
 	}
 	
-
-	
-
-
-
-
-
-
-
 
 	
 }

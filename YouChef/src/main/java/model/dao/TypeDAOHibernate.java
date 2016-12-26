@@ -60,8 +60,8 @@ public class TypeDAOHibernate implements TypeDAO{
 	}
 	@Override
 	public TypeBean insert(TypeBean typeBean) {
-		return getSession().get(TypeBean.class, typeBean);
-		
+		this.getSession().save(typeBean);
+		return typeBean;		
 	}
 	
 	@Override

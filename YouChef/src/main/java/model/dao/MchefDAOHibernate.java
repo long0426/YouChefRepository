@@ -43,10 +43,15 @@ public class MchefDAOHibernate implements MchefDAO {
 		if (null != select(bean)) {
 			getSession().clear();
 			this.getSession().update(bean);
-			return select(bean);
+			return bean;
 		}else{
 			return null;
 		}
+	}
+
+	@Override
+	public MchefBean select(Integer mc_id) {
+		return this.getSession().get(MchefBean.class, mc_id);
 	}
 
 }

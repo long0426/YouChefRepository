@@ -13,8 +13,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
 
 
 
@@ -35,7 +35,6 @@ public class VenueBean implements Serializable{
 	
 	@Id
 	@Column(name = "v_id")
-	//@SequenceGenerator(name="xxx", allocationSize=1, initialValue=15000) 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)   
 	public int getV_id() {
 		return v_id;
@@ -66,7 +65,7 @@ public class VenueBean implements Serializable{
 		this.v_status = v_status;
 	}
 	
-	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER, mappedBy="venueBean")
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER, mappedBy="mc_id")
 	@OrderBy("mc_id ASC")
 	public Set<MchefBean> getMchef() {
 		return mchef;

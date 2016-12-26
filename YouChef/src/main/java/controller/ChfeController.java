@@ -69,7 +69,7 @@ public class ChfeController {
 	//呼叫Model
 	//根據Model的執行結果，顯示View
 			if("Select".equals(chef)) {
-				List<ChefBean> result = chefService.getAll();
+				List<ChefBean> result = chefService.select();
 				model.addAttribute("getAll", result);
 				return "chef.select";
 			} else if("Insert".equals(chef)) {

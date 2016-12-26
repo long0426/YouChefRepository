@@ -113,4 +113,5 @@ public class DishesBean implements java.io.Serializable {
 		this.dishPhotoBean = dishPhotoBean;
 	}
 
+
 }

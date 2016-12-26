@@ -1,10 +1,7 @@
 package model;
 
-
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -35,8 +32,6 @@ public class ChefBean implements java.io.Serializable {
 	private Integer years;
 	private Set<OrdersBean> orders = new HashSet<OrdersBean>();
 	private Set<CalendarBean> calendars = new HashSet<CalendarBean>();
-
-	
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -135,6 +130,4 @@ public class ChefBean implements java.io.Serializable {
 				+ ", phone=" + phone + ", address=" + address + ", c_status=" + c_status + ", background=" + background
 				+  ", typeBean=" + typeBean + ", years=" + years ;
 	}
-
-	
 }

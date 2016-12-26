@@ -125,10 +125,7 @@ public class DishesDAOHibernate implements DishesDAO{
 		Query query = this.getSession().createQuery("from DishesBean as ds left join ds.dishPhotoBean as dps where ds.menu is not null and ds.mchefBean.mc_id =?");
 		query.setParameter(0, mc_id);
 	return (List<DishesBean>) query.getResultList();
-	
 
-
-	
 	}
 	@Override
 	public List<DishesBean> selectMenuByType(int t_id) {
@@ -139,4 +136,5 @@ public class DishesDAOHibernate implements DishesDAO{
 			query.setParameter(0, t_id);
 	return (List<DishesBean>) query.getResultList();
 	}
+
 }
