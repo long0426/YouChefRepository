@@ -27,7 +27,7 @@ public class InboxBeanDAOHibernate implements InboxDAO {
 @Override
 public List<InboxBean> showInbox(MemberBean memberBean) {
 	List<InboxBean> result = null;
-	Query query = this.getSession().createQuery("from InboxBean where receiver= :receiver and i_status= '0' or i_status= '1'");
+	Query query = this.getSession().createQuery("from InboxBean where receiver= :receiver and (i_status= '0' or i_status= '1') order by mail_time desc");
 	query.setParameter("receiver", memberBean);
 	result = query.getResultList();
 	return result;
@@ -36,7 +36,7 @@ public List<InboxBean> showInbox(MemberBean memberBean) {
 @Override
 public List<InboxBean> showOutbox(MemberBean memberBean) {
 	List<InboxBean> result = null;
-	Query query = this.getSession().createQuery("from InboxBean where sender= :sender");
+	Query query = this.getSession().createQuery("from InboxBean where sender= :sender order by mail_time desc");
 	query.setParameter("sender", memberBean);
 	result = query.getResultList();
 	return result;

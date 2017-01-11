@@ -18,6 +18,9 @@
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="order" value="100"></property>
 	</bean>
+	
+	<bean id="multipartResolver"
+    class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
 
 	<context:component-scan base-package="controller"></context:component-scan>
 	<mvc:annotation-driven></mvc:annotation-driven>

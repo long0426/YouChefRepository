@@ -64,6 +64,8 @@ public class DishPhotoService {
 		}
 	}
 	
+	
+	
 	public DishPhotoBean upload(DishPhotoBean bean){
 		return dishPhotoDao.insert(bean);
 	}
@@ -82,10 +84,22 @@ public class DishPhotoService {
 		return list;
 	}
 	
+	public DishPhotoBean selectByDpid(Integer dp_id){
+		return dishPhotoDao.selectByDpid(dp_id);
+	}
+	
 	public List<DishPhotoBean> selectByMcidAndDid(Integer mc_id, Integer d_id){
 		List<DishPhotoBean> list = null;
 		list = dishPhotoDao.selectByMcidAndDid(mc_id, d_id);
 		System.out.println(list);
 		return list;
+	}
+	
+	//書賢修改
+	public DishPhotoBean update(DishPhotoBean bean){
+		return dishPhotoDao.update(bean);
+	}
+	public DishPhotoBean selectByPrimary(Integer dp_id){
+		return dishPhotoDao.selectByPrimary(dp_id);
 	}
 }

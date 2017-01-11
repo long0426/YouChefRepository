@@ -111,10 +111,15 @@ public class ChefService {
 //		List<OrdersBean> list =ordersDao.selectlistReviewMember(c_id);
 //		return list;
 //	}
+	@Transactional(readOnly=true)
+	public List<Object[]>  selectType(int t_id) {
+		List<Object[]> list =dishesDao.selectDishesByType(t_id);
+		return list;
+	}
 	@Autowired
 	private DishesDAO dishesDao;	
-	public List<DishesBean> selectDishesByType(int t_id){
-		List<DishesBean> list =dishesDao.selectDishesByType(t_id);
+	public List<Object[]> selectDishesByType(Integer t_id){
+		List<Object[]> list =dishesDao.selectDishesByType(t_id);
 	return list;
 	}
 //	@Autowired
@@ -128,5 +133,29 @@ public class ChefService {
 	public ChefBean update(ChefBean bean) {
 		return chefDao.update(bean);
 	}
+	
+	public ChefBean update(ChefBean bean,String fisrtName, String lastName, String sex, String phone, 
+            String address,TypeBean typeBean,String c_status,
+            String background,Integer years, byte[] photo) {
+		bean.setFirstName(fisrtName);
+		bean.setLastName(lastName);
+		bean.setSex(sex);
+		bean.setPhone(phone);
+		bean.setAddress(address);
+		bean.setTypeBean(typeBean);
+		bean.setC_status(c_status);
+		bean.setBackground(background);
+		bean.setYears(years);
+		bean.setPhoto(photo);
+		chefDao.update(bean.getC_id(),bean.getFirstName(), bean.getLastName(),bean.getSex(),bean.getPhone(), bean.getAddress(), 
+				bean.getTypeBean(), bean.getC_status(), bean.getBackground(),bean.getYears(), bean.getPhoto());
+		
+		return bean;
+	}
+
+	public List<ChefBean> selectChefByType(int t_id){
+		List<ChefBean> list =chefDao.selectChefByType(t_id);
+		return list;
+	}	
 	
 }

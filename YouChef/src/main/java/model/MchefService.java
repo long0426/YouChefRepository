@@ -71,6 +71,14 @@ public class MchefService {
 		}
 		return null;
 	}
+	
+	public MchefBean apply(Integer m_id, MchefBean bean) {
+		if (null == mchefDao.select(m_id)) {
+			if (mchefDao.insert(bean) > 0)
+				return mchefDao.select(bean);
+		}
+		return null;
+	}
 
 	public List<MchefBean> selectAll() {
 		List<MchefBean> list = mchefDao.selectAll();
@@ -83,7 +91,6 @@ public class MchefService {
 	
 	public MchefBean select(Integer mc_id) {
 		return mchefDao.select(mc_id);
-
 	}
 
 	public MchefBean update(MchefBean bean) {

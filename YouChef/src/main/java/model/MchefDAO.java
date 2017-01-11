@@ -12,5 +12,7 @@ public interface MchefDAO {
 	MchefBean update(MchefBean bean);
 	
 	MchefBean select(Integer mc_id);
+	
+	MchefBean findByPrimaryKey(int mc_id);
 
 }

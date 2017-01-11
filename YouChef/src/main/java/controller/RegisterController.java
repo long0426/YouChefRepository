@@ -1,29 +1,34 @@
 package controller;
 
-import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+
 import model.MemberBean;
 import model.MemberService;
-import model.misc.GlobalService;
+import model.misc.GmailApp;
 
 @Controller
 @RequestMapping(path={"/member/register.controller"},
 				method={RequestMethod.GET, RequestMethod.POST}
+	
 )
 public class RegisterController {
 	private static final long serialVersionUID = 1L;
 	@Autowired
 	private MemberService memberService;
+	@Autowired
+	private GmailApp gmailApp;	
 	
 	Pattern emailPattern = Pattern.compile("^[\\w-]+(\\.[\\w-]+)*@[\\w-]+(\\.[\\w-]+)+$");
 	Pattern pwdPattern = Pattern.compile("^(?!.*[^a-zA-Z0-9!@#$%^&*])(?=.*\\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&*]).{6,}$");
@@ -66,10 +71,20 @@ public class RegisterController {
 		if(errors!=null && !errors.isEmpty()) {
 			return "register.error";
 		}
-		bean.setPassword(GlobalService.getMD5Encoding(GlobalService.encryptString(bean.getPassword())));
-		bean.setEmail(bean.getEmail().toLowerCase());
+		bean.setAc_status("0");
 		memberService.register(bean);
 		model.addAttribute("registerOK","註冊成功");
+		
+		String[] emaillist={"eeitgroup3@gmail.com",bean.getEmail()};
+		
+		try {
+			gmailApp.postMail(emaillist, "註冊成功", "親愛的 會員您好， 感謝您於優廚申請註冊， 現在您可開始使用會員專屬功能囉！   <br/>"
+    																+ "優廚 敬上   <br/>"
+    																+ "＊此信為系統自動發送，請勿直接回覆，謝謝＊", "eeitgroup3@gmail.com", "優廚YouChef");
+		} catch (MessagingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return "register.success";
 	}
 	

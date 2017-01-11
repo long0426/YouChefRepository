@@ -42,6 +42,6 @@ public class GetChefController {
 //		errors.put("test", "Test OK");
 		HttpSession session = request.getSession();
 		session.setAttribute("list", list);
-		return "leave";
+		return "chef";
 	}
 }

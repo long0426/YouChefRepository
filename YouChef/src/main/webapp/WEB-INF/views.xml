@@ -5,6 +5,7 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">	
 	
+<!-- 	Shian -->
 	<bean id="captcha.success" class="org.springframework.web.servlet.view.InternalResourceView">
 		<property name="url" value="/member/registerTest.jsp"/>
 	</bean>
@@ -21,18 +22,193 @@
 		<property name="url" value="/member/login.jsp"/>
 	</bean>
 	<bean id="login.success"	class="org.springframework.web.servlet.view.InternalResourceView">
-		<property name="url" value="/index.jsp"/>
+		<property name="url" value="/pages/main.jsp"/>
 	</bean>
+	<bean id="backend.fail"	class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/backend/index.jsp"/>
+	</bean>
+	<bean id="backend.success"	class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/backend/member.jsp"/>
+	</bean>
+	<bean id="admin.email"	class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/backend/mailbox.jsp"/>
+	</bean>
+	<bean id="admin.email.reply"	class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/backend/mailReply.jsp"/>
+	</bean>
+	<bean id="admin.email.out"	class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/backend/outBox.jsp"/>
+	</bean>
+	<bean id="admin.email.sendmail" class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/backend/sendMail.jsp"></property>
+	</bean>	
 	<bean id="email"	class="org.springframework.web.servlet.view.InternalResourceView">
 		<property name="url" value="/email/mailbox.jsp"/>
 	</bean>
 	<bean id="email.delete"	class="org.springframework.web.servlet.view.InternalResourceView">
 		<property name="url" value="/email/mailbox.jsp"/>
 	</bean>
-	<bean id="leave" class="org.springframework.web.servlet.view.InternalResourceView">
-		<property name="url" value="/pages/leave.jsp"></property>
+	<bean id="email.reply"	class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/email/mailReply.jsp"/>
 	</bean>
-	<bean id="chefcalendar" class="org.springframework.web.servlet.view.InternalResourceView">
-		<property name="url" value="/pages/chefcalendar.jsp"></property>
+	<bean id="email.out"	class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/email/outBox.jsp"/>
+	</bean>
+	<bean id="sendmail" class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/email/sendMail.jsp"></property>
 	</bean>	
+	<bean id="memorders.show" class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/member/main.jsp"></property>
+	</bean>	
+<!-- 	end Shian -->
+
+<!-- Long Bro -->
+	<bean id="chef"
+		class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/pages/getchef.jsp"></property>
+	</bean>
+	<bean id="mchef"
+		class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/pages/getmchef.jsp"></property>
+	</bean>
+	<bean id="dish.detail"
+		class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/dishdisplay/mchef-dish-detail.jsp"></property>
+	</bean>
+	<bean id="mchefapply"
+		class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/pages/mchefapply.jsp"></property>
+	</bean>
+	<bean id="member"
+		class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/pages/getmembertest.jsp"></property>
+	</bean>
+	<bean id="chefcalendar"
+		class="org.springframework.web.servlet.view.InternalResourceView">
+		<!-- <bean id="chefcalendar" class="org.springframework.web.servlet.view.RedirectView"> -->
+		<!-- <property name="contextRelative" value="true"></property> -->
+		<property name="url" value="/pages/chefcalendar.jsp"></property>
+	</bean>
+	<bean id="mchefcalendar" class="org.springframework.web.servlet.view.RedirectView">
+		<property name="contextRelative" value="true"></property>
+		<property name="url" value="/pages/mchefcalendar.jsp"></property>
+	</bean>
+	<bean id="applysuccess"
+		class="org.springframework.web.servlet.view.InternalResourceView">
+		<!-- <property name="contextRelative" value="true"></property> -->
+		<property name="url" value="/pages/applysuccess.jsp"></property>
+	</bean>
+	<bean id="applyfailed"
+		class="org.springframework.web.servlet.view.InternalResourceView">
+		<!-- <property name="contextRelative" value="true"></property> -->
+		<property name="url" value="/pages/applyfailed.jsp"></property>
+	</bean>
+	<bean id="mchefdishdisplay"
+		class="org.springframework.web.servlet.view.InternalResourceView">
+		<!-- <property name="contextRelative" value="true"></property> -->
+		<property name="url" value="/dishdisplay/mchef.jsp"></property>
+	</bean>
+	
+<!-- 	end Long Bro -->
+	
+	
+<!-- 	Test_Ricky -->
+	<bean id="chef.show" class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/ChefOrder.jsp"></property>
+	</bean>
+	<bean id="mchef.show" class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/MChefOrder.jsp"></property>
+	</bean>
+		<bean id="typeChef.show" class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/TypeChefOrder.jsp"></property>
+	</bean>
+	
+	<bean id="taiwanese" class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/Result.jsp"></property>
+	</bean>
+	<bean id="ChefCart.show" class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/CartTest.jsp"></property>
+	</bean>
+	<bean id="TypeChefCart.show" class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/TypeCartTest.jsp"></property>
+	</bean>
+	<bean id="MchefCart.show" class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/MchefCartTest.jsp"></property>
+	</bean>
+	<bean id="orders.show" class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/BackEndOrders.jsp"></property>
+	</bean>
+	
+<!-- 	Lee -->
+		<bean id="discusstest" class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/essaypages/discusstest.jsp"></property>
+	</bean>
+	<bean id="essaylist" class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/essaypages/essayList.jsp"></property>
+	</bean>
+	<bean id="essayinsert" class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/essaypages/essayinsert.jsp"></property>
+	</bean>
+	<bean id="essayinsertsuccess" class="org.springframework.web.servlet.view.RedirectView">
+		<property name="contextRelative" value="true"></property>
+		<property name="url" value="/essaypages/essayList.jsp"></property>
+	</bean>
+	<bean id="essayselect" class="org.springframework.web.servlet.view.RedirectView">
+		<property name="contextRelative" value="true"></property>
+		<property name="url" value="/essaypages/essayPage.jsp"></property>
+	</bean>
+	<bean id="essayedit" class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/essaypages/essayEdit.jsp"></property>
+	</bean>
+	<bean id="discussedit" class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/essaypages/discussEdit.jsp"></property>
+	</bean>
+	<bean id="discussPage" class="org.springframework.web.servlet.view.RedirectView">
+		<property name="contextRelative" value="true"></property>
+		<property name="url" value="/essaypages/discussPage.jsp"></property>
+	</bean>
+	<bean id="reviewPage" class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/essaypages/reviewPage.jsp"></property>
+	</bean>
+<!-- 	end Lee -->
+
+<!-- 	Song -->
+		<bean id="chef.select1" class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/chefdisplay/chefdisplayAll.jsp"></property>
+	</bean>
+	
+	<bean id="chef.select3" class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/chefdisplay/chefview.jsp"></property>
+	</bean>
+	
+	<bean id="SelectTypeDishes" class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/dishdisplay/dishdisplayAll.jsp"></property>
+	</bean>
+	
+	<bean id="SelectTypeDishes2" class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/dishdisplay/dishesmaintain.jsp"></property>
+	</bean>
+	<bean id="showDishesMenu2" class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/dishdisplay/dishesmaintain.jsp"></property>
+	</bean>
+	<bean id="Dishsuccess" class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/dishdisplay/dishesmaintain.jsp"></property>
+	</bean>
+	<bean id="chefsuccess" class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/dishdisplay/dishesmaintain.jsp"></property>
+	</bean>
+	<bean id="selectChef2" class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/chefdisplay/chefmaintain.jsp"></property>
+	</bean>
+	<bean id="chef.selectChefByType" class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/chefdisplay/chefdisplaybytype.jsp"></property>
+	</bean>
+	<bean id="Dishupsuccess" class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/dishdisplay/dishes.jsp"></property>
+	</bean>
+	<bean id="Chefupsuccess" class="org.springframework.web.servlet.view.InternalResourceView">
+		<property name="url" value="/chefdisplay/chef.jsp"></property>
+	</bean>
+<!-- 	by Song -->
+		
 </beans>

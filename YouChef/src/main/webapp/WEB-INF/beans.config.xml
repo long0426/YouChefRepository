@@ -16,6 +16,7 @@
 	</bean>
 	
 	<context:annotation-config></context:annotation-config>
+		<context:component-scan base-package="model.*"></context:component-scan>
 	<context:component-scan base-package="model"></context:component-scan>
 	
 	<bean id="transactionManager"
@@ -25,7 +26,7 @@
 	
 	<!-- 威毅 -->
 	<bean id="sdfYM" class="java.text.SimpleDateFormat">
-		<constructor-arg value="yyyy-MM"></constructor-arg>
+		<constructor-arg value="yyyyMM"></constructor-arg>
 	</bean>
 
 	<bean id="sdfD" class="java.text.SimpleDateFormat">
@@ -35,12 +36,13 @@
 	<bean id="sdfM" class="java.text.SimpleDateFormat">
 		<constructor-arg value="MM"></constructor-arg>
 	</bean>
-	
+	<bean id="sdfY" class="java.text.SimpleDateFormat">
+	<constructor-arg value="yyyy"></constructor-arg>
+	</bean>
 	<!--  書賢 -->
 	<bean id="sdfYMH" class="java.text.SimpleDateFormat">
 		<constructor-arg value="yyyy年MM月dd日 mm:ss"></constructor-arg>
 	</bean>
-	
 	<tx:annotation-driven transaction-manager="transactionManager"/>
 	
 </beans>

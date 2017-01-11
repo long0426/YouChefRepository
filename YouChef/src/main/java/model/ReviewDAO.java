@@ -14,5 +14,8 @@ public interface ReviewDAO {
 	List<ReviewBean> selectAll();
 
 	ReviewBean update(ReviewBean bean);
-
+	
+	Double MchefStars(Integer mc_id);
+	
+	Double ChefStars(Integer c_id);
 }

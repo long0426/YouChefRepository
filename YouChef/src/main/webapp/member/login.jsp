@@ -69,7 +69,16 @@
 							<img src="<c:url value="/image/unknow64.png" />" class="center-block">
 						</c:when>
 						<c:otherwise>
-							<img src="">
+							<c:choose>
+								<c:when test="${not empty memberPic.photo}">
+									<img src="<c:url value="/pages/getMemLoginImage.controller?email=${memberPic.email}" />" class="center-block">
+									<p><label>請問你是 ${memberPic.firstName}${memberPic.lastName} 嗎?</label></p>
+								</c:when>
+								<c:otherwise>
+									<img src="<c:url value="/image/unknow64.png" />" class="center-block">
+									<p><label>請問你是 ${memberPic.firstName}${memberPic.lastName} 嗎?</label></p>
+								</c:otherwise>
+							</c:choose>
 						</c:otherwise>
 					</c:choose>
 				</div>
@@ -101,7 +110,9 @@
 						</c:when>
 					</c:choose>
 				</div>
-				<button type="submit" class="btn btn-default">送出</button>
+				<button type="submit" class="btn btn-default ">送出</button> 
+				<a href="<c:url value="/member/register.jsp"/>" class="btn btn-default">點我加入會員</a>
+				<a href="<c:url value="#"/>" class="btn btn-default">忘記密碼</a>
 			</form>
 		</div>
 
@@ -110,7 +121,7 @@
 	<div class="container col-md-8 col-md-offset-2">
 		<hr>
 		<footer>
-			<p>&copy; 2016 Company, Inc.</p>
+			<p>&copy; 2017 YouChef Company, Inc.</p>
 		</footer>
 	</div>
 

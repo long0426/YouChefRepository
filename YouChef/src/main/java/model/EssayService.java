@@ -7,10 +7,11 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Service;
-
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Service(value = "essayService")
+@Transactional
 public class EssayService {
 	@Autowired 
 	private EssayDAO essayDao;
@@ -71,17 +72,24 @@ public class EssayService {
 		}
 	}
 	
-	private int insert(EssayBean bean) {
+	public int insert(EssayBean bean) {
 		return essayDao.insert(bean);
 	}
 	public List<EssayBean> selectAll() {
 		List<EssayBean> list = essayDao.selectAll();
 		return list;
 	}
-	private EssayBean select(EssayBean bean) {
+	public EssayBean select(EssayBean bean) {
 		return essayDao.select(bean);
 	}
-	private EssayBean update(EssayBean bean){
+	public EssayBean update(EssayBean bean){
 		return essayDao.update(bean);
 	}
+	public List<EssayBean> listAll() {
+		List<EssayBean> list = essayDao.listAll();
+		return list;
+	}
+	public boolean delete(int essay_id, String e_status){
+		return essayDao.delete(essay_id, "1");
+	} 
 }

@@ -67,17 +67,24 @@ public class DiscussService {
 	}
 
 	
-	private DiscussBean select(DiscussBean bean) {
+	public DiscussBean select(DiscussBean bean) {
 		return discussDao.select(bean);
 	}
-	private int insert(DiscussBean bean) {
+	public int insert(DiscussBean bean) {
 		return discussDao.insert(bean);
 	}
 	public List<DiscussBean> selectAll() {
 		List<DiscussBean> list = discussDao.selectAll();
 		return list;
 	}
-	private DiscussBean update(DiscussBean bean){
+	public DiscussBean update(DiscussBean bean){
 		return discussDao.update(bean);
+	}
+	public List<DiscussBean> discussAll(Integer essayBean) {
+		List<DiscussBean> list = discussDao.discussAll(essayBean);
+		return list;
+	}
+	public boolean delete(int discuss_id, String d_status){
+		return discussDao.delete(discuss_id, "1");
 	}
 }

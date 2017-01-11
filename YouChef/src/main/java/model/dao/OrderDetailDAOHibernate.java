@@ -2,7 +2,9 @@
 
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -17,6 +19,7 @@ import model.ChefDAO;
 import model.DishesBean;
 import model.OrderDetailBean;
 import model.OrderDetailDAO;
+import model.OrderDishesBean;
 import model.OrdersBean;
 import model.OrdersDAO;
 
@@ -24,6 +27,8 @@ import model.OrdersDAO;
 public class OrderDetailDAOHibernate implements OrderDetailDAO {
 
 	private static final String GET_ALL_STMT = "from OrderDetailBean order by od_id";
+	private static final String FIND_By_ORDER_ID = "from OrderDetailBean where o_id = ?";
+	
 	
 	@Autowired
 	private SessionFactory sessionFactory;
@@ -96,18 +101,17 @@ public class OrderDetailDAOHibernate implements OrderDetailDAO {
     }
     
     
-    
+
+
     
 
 	@Override
 	public OrderDetailBean insert(OrderDetailBean orderDetailBean) {
-		if(orderDetailBean!=null){
 			OrderDetailBean inserted = this.getSession().get(OrderDetailBean.class, orderDetailBean.getOd_id());
 			if(inserted==null){
 				this.getSession().save(orderDetailBean);
 				return orderDetailBean;
 			}
-		}
 		return null;
 	}
 	
@@ -137,6 +141,18 @@ public class OrderDetailDAOHibernate implements OrderDetailDAO {
     		updated.setOrdersBean(ordersBean);
     	}
     	return updated;
+	}
+
+	@Override
+	public OrderDetailBean findByOrderId(int o_id) {
+		javax.persistence.Query query = this.getSession().createQuery(FIND_By_ORDER_ID);
+		query.setParameter(0, o_id);
+    	List <OrderDetailBean> result = query.getResultList();
+    	if (result.isEmpty()) {
+    	    return null; 
+    	} else {
+    	    return result.get(0);
+    	}
 	}
 
 

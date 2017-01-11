@@ -56,5 +56,23 @@ public class ReviewDAOHibernate implements ReviewDAO{
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
+	private final String SELECT_MCHEFSTARS = "select ROUND((stars/orderNum),1) from ReviewBean where mc_id=:mc_id";
+
+	@Override
+	public Double MchefStars(Integer mc_id) {
+		Query query = this.getSession().createQuery(SELECT_MCHEFSTARS);
+		System.out.println("mc_id = " + mc_id);
+		query.setParameter("mc_id", mc_id);
+		return  (double)query.getResultList().get(0);	
+	}
 	
+	private final String SELECT_CHEFSTARS = "select ROUND((stars/orderNum),1) from ReviewBean where c_id=:c_id";
+
+	@Override
+	public Double ChefStars(Integer c_id) {
+		Query query = this.getSession().createQuery(SELECT_CHEFSTARS);
+		System.out.println("c_id = " + c_id);
+		query.setParameter("c_id", c_id);
+		return  (double)query.getResultList().get(0);	
+	}
 }

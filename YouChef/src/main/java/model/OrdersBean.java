@@ -24,7 +24,7 @@ import org.springframework.stereotype.Component;
 
 import model.MchefBean;
 
-@Component(value="orders")
+
 @Entity
 @Table(name = "Orders")
 public class OrdersBean implements Serializable{

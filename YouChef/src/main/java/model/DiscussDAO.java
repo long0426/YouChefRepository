@@ -10,5 +10,8 @@ public interface DiscussDAO {
 	List<DiscussBean> selectAll();
 
 	DiscussBean update(DiscussBean bean);
-
+	
+	List<DiscussBean> discussAll(Integer essayBean);
+	
+	boolean delete(int discuss, String string);
 }

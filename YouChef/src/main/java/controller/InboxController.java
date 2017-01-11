@@ -12,23 +12,36 @@ import model.InboxService;
 import model.MemberBean;
 
 @Controller
-@RequestMapping(
-			path={"/mail/inbox.controller"},
-			method={RequestMethod.GET, RequestMethod.POST}
-		)
+@RequestMapping
 public class InboxController {
 	@Autowired
 	private InboxService inboxService;
 	
-	@RequestMapping
+	@RequestMapping(
+			path={"/mail/inbox.controller"},
+			method={RequestMethod.GET, RequestMethod.POST}
+			)
 	public String service(
 				Model model,
 				HttpSession session
 			){
 			MemberBean receiver = (MemberBean)session.getAttribute("user");
 			List<InboxBean> emails = (List<InboxBean>) inboxService.showInbox(receiver);
-			model.addAttribute("mails",emails);
+			session.setAttribute("mails",emails);
 		return "email";
 	}
 	
+	@RequestMapping(
+			path={"/admin/mail/inbox.controller"},
+			method={RequestMethod.GET, RequestMethod.POST}
+			)
+	public String adminService(
+				Model model,
+				HttpSession session
+			){
+			MemberBean admin = (MemberBean)session.getAttribute("admin");
+			List<InboxBean> emails = (List<InboxBean>) inboxService.showInbox(admin);
+			session.setAttribute("adminMails",emails);
+		return "admin.email";
+	}
 }

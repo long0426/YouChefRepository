@@ -33,7 +33,7 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
     
-    <script charset="UTF-8" src="../js/address.js"></script>
+    <script charset="UTF-8" src="<c:url value="/js/address.js"/>"></script>
     
   </head>
 
@@ -52,7 +52,7 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
 			<form class="navbar-form navbar-right"
-				action="<c:url value="/member/login.controller"/>" method="GET">
+				action="<c:url value="/member/login.controller"/>" method="POST">
 				<div class="form-group">
 					<input type="text" placeholder="Email" name="email"
 						class="form-control">
@@ -72,7 +72,7 @@
     <div class="container col-md-8 col-md-offset-2">
 	<h2>加入會員-設定帳號</h2>
 	<br/>
-	<form class="form-group" action="<c:url value="/member/register.controller"/>" method="get">
+	<form class="form-group" action="<c:url value="/member/register.controller"/>" method="POST">
 		<div class="form-group" id="span">
 <!-- 		<div class = "col-xs-4"> -->
 			<label for="inputMail">電子信箱:

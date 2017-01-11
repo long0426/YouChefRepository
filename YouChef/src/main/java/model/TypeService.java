@@ -8,7 +8,9 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 @Service(value = "typeService")
+@Transactional
 public class TypeService {
 	public static void main(String[] args) {
 		ApplicationContext context = new ClassPathXmlApplicationContext("beans.config.xml");
@@ -44,9 +46,11 @@ public class TypeService {
 }
 	@Autowired
 	private TypeDAO typeDao;
+	@Transactional(readOnly=true)
 	public TypeBean select(int t_id) {
 		return typeDao.select(t_id);
 	}
+	@Transactional
 	public TypeBean insert(TypeBean typeBean){
 		TypeBean result = null;
 		if(typeBean != null){
@@ -54,6 +58,7 @@ public class TypeService {
 		}
 		return result;
 	}
+	@Transactional(readOnly=true)
 	public List<TypeBean> selectAll() {
 		List<TypeBean> list = typeDao.select();
 		return list;

@@ -58,5 +58,18 @@ public class CsBeanDAOHibernate implements CsDAO {
 		}
 		return false;
 	}
+	@Override
+	public List<CsBean> selectAll(int m_id) {
+		List<CsBean> result = null;
+		Query query = this.getSession().createQuery("from CsBean where m_id= :m_id or m_id = 3001");
+		query.setParameter("m_id", m_id);
+		result = query.getResultList();
+		if (result!=null){
+			return result;
+		}else {
+			return null;
+		}
+	}
 
+	
 }

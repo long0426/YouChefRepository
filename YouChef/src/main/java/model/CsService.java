@@ -62,8 +62,8 @@ public class CsService {
 		}
 	}
 
-	public List<CsBean> listAll() {
-		return csDao.select();
+	public List<CsBean> listAll(int m_id) {
+		return csDao.selectAll(m_id);
 	}
 
 	public void deleteMessage(CsBean bean) {

@@ -8,6 +8,8 @@ public interface OrderDishesDAO {
 	OrderDishesBean update(OrderDetailBean orderDetailBean, DishesBean dishesBean, Integer dishNum, int ods_id);
 	
 	OrderDishesBean findByPrimaryKey(int ods_id);
+	
+	List<OrderDishesBean> listByOrderDetailId(int od_id);
 
 	List<OrderDishesBean> getAll();
 }

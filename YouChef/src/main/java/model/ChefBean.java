@@ -19,7 +19,7 @@ import javax.persistence.Table;
 public class ChefBean implements java.io.Serializable {
 	private static final long serialVersionUID = 1L;
 
-	private int c_id;
+	private Integer c_id;
 	private	String lastName;
 	private	String firstName;
 	private	String sex;
@@ -35,10 +35,10 @@ public class ChefBean implements java.io.Serializable {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public int getC_id() {
+	public Integer getC_id() {
 		return c_id;
 	}
-	public void setC_id(int c_id) {
+	public void setC_id(Integer c_id) {
 		this.c_id = c_id;
 	}
 	public String getLastName() {

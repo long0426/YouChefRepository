@@ -10,4 +10,6 @@ public interface CsDAO {
 	List<CsBean> select();
 	
 	boolean update(int message_id, String cs_status);
+	
+	List<CsBean> selectAll(int m_id);
 }

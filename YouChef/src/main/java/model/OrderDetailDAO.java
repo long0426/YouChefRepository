@@ -11,4 +11,8 @@ public interface OrderDetailDAO {
 	OrderDetailBean findByPrimaryKey(int od_id);
 
 	List<OrderDetailBean> getAll();
+	
+	OrderDetailBean findByOrderId(int o_id);
+	
+	
 }

@@ -1,0 +1,106 @@
+#navigation-wapper {
+    z-index: 9977;
+    position: fixed;
+	top:365px;
+    width: 100%;
+    height: 50px;
+    color: #6e7071;
+    background: #fff;
+    font-size: 16px;
+    font-family: "NotoSansCJKtc-Light",BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+}
+
+#new-navigation {
+    position: fixed;
+    left: 50%;
+    margin-left: -494px;
+    width: 990px;
+    will-change: left;
+    background-color: #fff;
+}
+
+#nav-bar {
+    width: 80%;
+    height: 100%;
+    float: left;
+    line-height: 29px;
+}
+
+ol, ul {
+ 	  list-style: none;
+}
+
+#nav-bar>.tab {
+    position: relative;
+    padding: 10px 15px 0 15px;
+    height: 40px;
+    float: left;
+}
+
+#navigation-wapper .active>a {
+    color: #006ac6;
+    font-family: "NotoSansCJKtc-Regular",BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+
+#navigation-wapper a {
+    color: #6e7071;
+}
+#navigation-wapper a, 
+#navigation-wapper a:hover {
+    display: block;
+    text-decoration: none;
+}
+
+#nav-bar .tab .nav-channel-list {
+    display: none;
+    border: 1px solid #e9e7e8;
+    border-top: 0;
+    border-radius: 0 0 5px 5px;
+    font-size: 12px;
+}
+
+.topbar__nav {
+   	font-size: 13px;
+}
+
+.topbar__nav {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.topbar__lang, .topbar__notification, .topbar__user {
+   	z-index: 5;
+}
+.topbar__lang, .topbar__user {
+    text-align: center;
+}
+.topbar__lang, .topbar__notification, .topbar__user {
+    position: relative;
+    float: left;
+    width: 55px;
+}
+
+.topbar__lang__lists {
+    top: 50px;
+}
+.topbar__lang__lists, .topbar__logo__chanenl-lists, .topbar__user__lists {
+    max-height: 0;
+    overflow: hidden;
+    top: 50px;
+    width: 100%;
+    -webkit-transition: max-height .25s;
+    transition: max-height .25s;
+}
+.topbar__lang__lists, .topbar__logo__chanenl-lists, .topbar__notification .topbar__dropdown-lists, .topbar__user__lists {
+    position: absolute;
+    left: 0;
+    -webkit-box-shadow: 0 0 5px #ccc;
+    box-shadow: 0 0 5px #ccc;
+}
+
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, textarea, p, blockquote, th, td {
+    margin: 0;
+    padding: 0;
+}

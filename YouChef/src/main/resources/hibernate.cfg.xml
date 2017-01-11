@@ -4,9 +4,11 @@
 		"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
 	<session-factory>
-		<property name="hibernate.dialect">org.hibernate.dialect.SQLServerDialect</property>
+	<!--SQL方言,以下使用SQLServer -->
+		<property name="hibernate.dialect">model.CustomDialect</property>
 		<property name="hibernate.show_sql">true</property>
 		<!-- <property name="hibernate.current_session_context_class">thread</property> -->
+		
 		<mapping class="model.MemberBean" />
 		<mapping class="model.MchefBean" />
 		<mapping class="model.VenueBean" />
@@ -24,5 +26,4 @@
 		<mapping class="model.DiscussBean" />
 		<mapping class="model.ReviewBean" />
 	</session-factory>
-
 </hibernate-configuration>

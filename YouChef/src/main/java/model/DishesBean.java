@@ -21,7 +21,7 @@ import javax.persistence.Table;
 public class DishesBean implements java.io.Serializable {
 	private static final long serialVersionUID = 1L;
 	
-	private int d_id;
+	private Integer d_id;
 	private MchefBean mchefBean;
 	private double price; 
 	private	String d_name;
@@ -39,10 +39,10 @@ public class DishesBean implements java.io.Serializable {
 	}
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public int getD_id() {
+	public Integer getD_id() {
 		return d_id;
 	}
-	public void setD_id(int d_id) {
+	public void setD_id(Integer d_id) {
 		this.d_id = d_id;
 	}
 	public double getPrice(){

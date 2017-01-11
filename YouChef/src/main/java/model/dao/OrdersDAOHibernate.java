@@ -5,27 +5,36 @@ import java.sql.Timestamp;
 import java.time.ZonedDateTime;
 import java.util.List;
 
+import javax.persistence.Query;
 
-
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.SharedSessionContract;
+import org.hibernate.query.NativeQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import model.CalendarDAO;
 import model.ChefBean;
 import model.ChefDAO;
 import model.MchefBean;
+import model.MemberBean;
 import model.OrdersBean;
 import model.OrdersDAO;
 @Repository(value="ordersDAO")
+@Transactional(transactionManager="transactionManager")
 public class OrdersDAOHibernate implements OrdersDAO {
 
 	private static final String GET_ALL_STMT = "from OrdersBean order by o_id";
+	private static final String LIST_ORDERHISTORY_STMT = "from OrdersBean where m_id =? order by orderDate DESC";
+	private static final String CANCELCODE = "1";
+	private static final String COMPLETELCODE = "2";
+	private static final String STANDUPCODE = "3";
 
 	
 	@Autowired
@@ -40,10 +49,11 @@ public class OrdersDAOHibernate implements OrdersDAO {
 		try {
 			sessionFactory.getCurrentSession().beginTransaction();
 			OrdersDAO orders = (OrdersDAOHibernate) context.getBean("ordersDAO");
+			System.out.println("History= " + orders.listOrderHistory(1003));
 			List <OrdersBean> all = (List <OrdersBean>) orders.getAll();
 			System.out.println("all= "+all);
 			System.out.println("----------------");
-			OrdersBean single = orders.findByPrimaryKey(12000);
+			OrdersBean single = orders.findByPrimaryKey(12004);
 			System.out.println("single= "+single);
 			System.out.println("----------------");
 			System.out.println("single's MemberBean= "+single.getMemberBean());
@@ -55,8 +65,8 @@ public class OrdersDAOHibernate implements OrdersDAO {
 			
 			ChefDAO ch = (ChefDAOHibernate) context.getBean("chefDao");
 			ChefBean ch1 = ch.select(3003);
-//			System.out.println("ch1: " + ch1);
-//			System.out.println("----------------");
+			System.out.println("ch1: " + ch1);
+			System.out.println("----------------");
 			
 			OrdersBean newOne = new OrdersBean();
 			newOne.setChefBean(ch1);
@@ -77,10 +87,10 @@ public class OrdersDAOHibernate implements OrdersDAO {
 			System.out.println("insert= "+ insert);
 			
 			System.out.println("----------------");
-			OrdersBean cancel = orders.cancel("1", new Timestamp(System.currentTimeMillis()) , new Integer(12000));
+			OrdersBean cancel = orders.cancel(new Timestamp(System.currentTimeMillis()) , new Integer(12000));
 			System.out.println("cancel= "+ cancel);
 			System.out.println("----------------");
-			OrdersBean complete = orders.complete("3", new Timestamp(System.currentTimeMillis()), new Integer(12000));
+			OrdersBean complete = orders.complete(new Timestamp(System.currentTimeMillis()), new Integer(12000));
 			System.out.println("complete= "+ complete);
 			System.out.println("----------------");
 			
@@ -128,7 +138,7 @@ public class OrdersDAOHibernate implements OrdersDAO {
     	}
     	return updated;
     }
-    
+    @Transactional
     @Override
 	public OrdersBean findByPrimaryKey(int o_id){
     	return this.getSession().get(OrdersBean.class, o_id);
@@ -136,10 +146,18 @@ public class OrdersDAOHibernate implements OrdersDAO {
     
     
     @Override
+    @Transactional
 	public List<OrdersBean> getAll(){
     	javax.persistence.Query query = this.getSession().createQuery(GET_ALL_STMT);
     	return (List<OrdersBean>) query.getResultList();
     	}
+	@Override
+	public List<OrdersBean> listOrderHistory(int m_id) {
+    	javax.persistence.Query query = this.getSession().createQuery(LIST_ORDERHISTORY_STMT);
+    	query.setParameter(0,m_id);
+    	return (List<OrdersBean>) query.getResultList();
+
+	}
 
 
 
@@ -155,12 +173,14 @@ public class OrdersDAOHibernate implements OrdersDAO {
 	}
 
 
+	
+
 
 	@Override
-	public OrdersBean cancel(String o_status,Timestamp updateTime, Integer o_id) {
+	public OrdersBean cancel(Timestamp updateTime, Integer o_id) {
 		OrdersBean cancellation = this.getSession().get(OrdersBean.class,o_id);
 		if(cancellation!=null){
-			cancellation.setO_status(o_status);
+			cancellation.setO_status(CANCELCODE);
 			cancellation.setUpdateTime(updateTime);	
 		}
 		return cancellation;
@@ -170,19 +190,45 @@ public class OrdersDAOHibernate implements OrdersDAO {
 
 
 	@Override
-	public OrdersBean complete(String o_status,Timestamp updateTime, Integer o_id) {
+	public OrdersBean complete(Timestamp updateTime, Integer o_id) {
 		OrdersBean completion = this.getSession().get(OrdersBean.class,o_id);
 		if(completion!=null){
-			completion.setO_status(o_status);
+			completion.setO_status(COMPLETELCODE);
 			completion.setUpdateTime(updateTime);	
 		}
 		return completion;
 	}
 
 	@Override
-	public List<OrdersBean> selectlistReviewMember(int c_id) {
-		// TODO Auto-generated method stub
-		return null;
+	public OrdersBean standUp(Timestamp updateTime, Integer o_id) {
+		OrdersBean standMeUp = this.getSession().get(OrdersBean.class,o_id);
+		if(standMeUp!=null){
+			standMeUp.setO_status(STANDUPCODE);
+			standMeUp.setUpdateTime(updateTime);
+		}
+		return standMeUp;
 	}
+	//Lee 更新評價
+    @Override
+	public OrdersBean poreview(String r_message,float r_stars,Integer o_id){
+    	OrdersBean updatereview = this.getSession().get(OrdersBean.class,o_id);
+    	if(updatereview!=null){
+    		updatereview.setR_message(r_message);
+    		updatereview.setR_stars(r_stars);
+    	}
+    	return updatereview;
+    }
+    
+//    //shian 更新
+//	private static final String GET_ALL_BY_MCHEF = "SELECT {ORDER.*}, {MEMBER.*} FROM ORDERS O, MEMBER M"
+//			+ "WHERE O.MC_ID = MEMBER.M_ID";
+//	public List<Object[]> getAllOrdersByMchef(){
+////    	SQLQuery query = this.getSession().createSQLQuery(GET_ALL_BY_MCHEF)
+////    			.addEntity("orders",OrdersBean.class)
+////    			.addEntity("member",MemberBean.class);
+//		Query query = this.getSession().createQuery("from OrdersBean as ods left join ods.M")
+//    	
+//    			
+//    }
 }
 

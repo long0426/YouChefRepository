@@ -139,6 +139,9 @@ public class ChefDAOHibernate implements ChefDAO {
 	@Override
 	public ChefBean insert(ChefBean bean) {
 		if(bean!=null){
+			if(bean.getC_id()==null){
+				bean.setC_id(0);
+			}
 			ChefBean insert = this.getSession().get(ChefBean.class, bean.getC_id());
 			if(insert==null){
 				this.getSession().save(bean);
@@ -160,10 +163,31 @@ public class ChefDAOHibernate implements ChefDAO {
 		return null;
 	}
 	@Override
-	public List<ChefBean> selectChefByType(int t_id) {
+	public List<ChefBean> selectChefByType(Integer t_id) {
 		Query query = this.getSession().createQuery("from ChefBean where t_id=?");
 		query.setParameter(0, t_id);
 		return (List<ChefBean>) query.getResultList();
+	}
+	
+	@Override
+	public ChefBean update(int c_id, String fisrtName, String lastName, String sex, String phone, 
+            String address,TypeBean typeBean,String c_status,
+            String background,Integer years, byte[] photo) {
+		ChefBean update = this.getSession().get(ChefBean.class, c_id );
+		if(update!=null){
+			update.setLastName(lastName);
+			update.setFirstName(fisrtName);
+			update.setSex(sex);
+			update.setPhone(phone);
+			update.setAddress(address);
+			update.setTypeBean(typeBean);
+			update.setC_status(c_status);
+			update.setBackground(background);
+			update.setYears(years);
+			update.setPhoto(photo);
+			this.getSession().save(update);
+		}
+		return update;
 	}
 }
 

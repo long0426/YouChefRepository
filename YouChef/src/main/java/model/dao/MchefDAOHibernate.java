@@ -54,4 +54,8 @@ public class MchefDAOHibernate implements MchefDAO {
 		return this.getSession().get(MchefBean.class, mc_id);
 	}
 
+	@Override
+	public MchefBean findByPrimaryKey(int mc_id) {
+	    	return getSession().get(MchefBean.class, mc_id);
+	}
 }

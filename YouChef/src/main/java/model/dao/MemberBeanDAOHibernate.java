@@ -36,6 +36,7 @@ public class MemberBeanDAOHibernate implements MemberDAO {
 	@Override
 	public MemberBean insert(MemberBean bean) {
 		if(bean!=null){
+			bean.setM_id(0);
 			MemberBean insert = this.getSession().get(MemberBean.class, bean.getM_id());
 			if(insert==null){
 				this.getSession().save(bean);
@@ -47,7 +48,7 @@ public class MemberBeanDAOHibernate implements MemberDAO {
 
 	@Override
 	public List<MemberBean> select() {
-		Query query = this.getSession().createQuery("from MemberBean");
+		Query query = this.getSession().createQuery("from MemberBean where ac_status != :ac_status").setParameter("ac_status", "2");
 		return (List<MemberBean>) query.getResultList();
 	}
 
@@ -90,5 +91,25 @@ public class MemberBeanDAOHibernate implements MemberDAO {
 		}
 		return false;
 	}
+	@Override
+	public boolean updateStatus(int m_id, String ac_status) {
+		MemberBean bean = getSession().get(MemberBean.class, m_id);
+			if(bean!=null){
+				bean.setAc_status(ac_status);
+				return true;
+			}
+		return false;
+	}
 	
+	@Override
+	public boolean update(MemberBean bean) {
+		try {
+			if (null != this.getSession().get(MemberBean.class, bean.getM_id()))
+				this.getSession().update(bean);
+			return true;
+		} catch (RuntimeException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
 }

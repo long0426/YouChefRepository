@@ -56,7 +56,7 @@ public class DishesDAOHibernate implements DishesDAO{
 //			DishesBean select = dishesDao.select(5001);
 //			System.out.println("select="+select);
 //			System.out.println("selects="+selects);
-			List<DishesBean> selectDishesByType=dishesDao.selectDishesByType(3003);
+			List<Object[]> selectDishesByType=dishesDao.selectDishesByType(3003);
 			System.out.println("selectType="+selectDishesByType);
 //			List<DishesBean> selectMchef = dishesDao.selectMchef(4003);
 //			System.out.println("selectMchef="+selectMchef);
@@ -82,7 +82,9 @@ public class DishesDAOHibernate implements DishesDAO{
 
 	@Override
 	public DishesBean insert(DishesBean dishesBean) {
-		return getSession().get(DishesBean.class, dishesBean);
+		if ((int) this.getSession().save(dishesBean) > 0)
+			return dishesBean;
+		return null;
 	}
 	
 	
@@ -113,28 +115,41 @@ public class DishesDAOHibernate implements DishesDAO{
 		}
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<DishesBean> selectDishesByType(int t_id) {
-		Query query = this.getSession().createQuery("from DishesBean as ds left join ds.dishPhotoBean as dps where ds.menu is null and ds.typeBean.t_id=?");
+	public List<Object[]> selectDishesByType(int t_id) {
+		Query query = this.getSession().createQuery("from DishesBean as ds left join ds.dishPhotoBean as dps where ds.typeBean.t_id=?");
 		query.setParameter(0, t_id);					
-		return (List<DishesBean>) query.getResultList();
+		return (List<Object[]>) query.getResultList();
 	}
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<DishesBean> selectDishesByMchef (int mc_id){ 
-		Query query = this.getSession().createQuery("from DishesBean as ds left join ds.dishPhotoBean as dps where ds.menu is not null and ds.mchefBean.mc_id =?");
+	public List<Object[]> selectDishesByMchef (int mc_id){ 
+		Query query = this.getSession().createQuery("from DishesBean as ds left join ds.dishPhotoBean as dps where ds.mchefBean.mc_id =?");
 		query.setParameter(0, mc_id);
-	return (List<DishesBean>) query.getResultList();
-
+	return (List<Object[]>) query.getResultList();
 	}
+	
 	@Override
-	public List<DishesBean> selectMenuByType(int t_id) {
+	public List<Object[]> selectMenuByType(int t_id) {
 //		Query query = this.getSession().createQuery("from DishesBean where menu is not NULL and t_id =?");
 //		query.setParameter(0, t_id);
 //	return (List<DishesBean>) query.getResultList();
-		Query query = this.getSession().createQuery("from DishesBean as ds left join ds.dishPhotoBean as dps where ds.menu is not null and ds.typeBean.t_id=?");
+		Query query = this.getSession().createQuery("from DishesBean as ds left join ds.dishPhotoBean as dps where  ds.typeBean.t_id=?");
 			query.setParameter(0, t_id);
-	return (List<DishesBean>) query.getResultList();
+	return (List<Object[]>) query.getResultList();
 	}
-
+	
+	@Override
+	public DishesBean updatedish(int d_id,String d_name, String d_briefing, double price, TypeBean typeBean, String d_status) {
+		DishesBean updatedish=this.getSession().get(DishesBean.class, d_id);
+		if(updatedish!=null){
+			updatedish.setD_name(d_name);
+			updatedish.setD_briefing(d_briefing);
+			updatedish.setPrice(price);
+			updatedish.setTypeBean(typeBean);
+			updatedish.setD_status(d_status);
+			this.getSession().save(updatedish);
+		}
+		return updatedish;
+	}
 }

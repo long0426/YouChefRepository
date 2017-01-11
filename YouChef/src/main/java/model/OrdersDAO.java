@@ -12,14 +12,18 @@ public interface OrdersDAO {
 	
 	OrdersBean updatePlace(String dinePlace, Date orderDate, Timestamp updateTime, Integer o_id);
 	
-	OrdersBean cancel(String o_status,Timestamp updateTime, Integer o_id);
+	OrdersBean cancel(Timestamp updateTime, Integer o_id);
 	
-	OrdersBean complete(String o_status,Timestamp updateTime, Integer o_id);
+	OrdersBean complete(Timestamp updateTime, Integer o_id);
+	
+	OrdersBean standUp(Timestamp updateTime, Integer o_id);
 	
 	OrdersBean findByPrimaryKey(int o_id);
+	
+	List<OrdersBean> listOrderHistory(int m_id);
 
 	List<OrdersBean> getAll();
-
-	List<OrdersBean> selectlistReviewMember(int c_id);
+	//Lee添加
+	OrdersBean poreview(String r_message,float r_stars,Integer o_id);
 
 }

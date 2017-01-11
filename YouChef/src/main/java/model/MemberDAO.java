@@ -15,5 +15,9 @@ public interface MemberDAO {
 			                       String district, String address, String briefing, byte[] photo);
 	
 	boolean update(String password, int m_id);
+	
+	boolean update(MemberBean bean);
+	
+	boolean updateStatus(int m_id, String ac_status);
 
 }
